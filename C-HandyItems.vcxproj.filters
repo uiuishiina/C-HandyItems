@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Log">
+      <UniqueIdentifier>{bfcd8b49-79ba-4e65-90ef-7ccde99931fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Container">
+      <UniqueIdentifier>{d276686b-d9ed-4bc7-8154-62a7469e1f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Key">
+      <UniqueIdentifier>{9cca6c73-6212-4f1c-9cb6-d85fc4ef63d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Others">
+      <UniqueIdentifier>{a6af0541-d8d4-400b-ba2e-87893485dcc3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Entry\Entry.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ItemsHeader\Log\LogStruct.h">
+      <Filter>ヘッダー ファイル\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Log\LogStructFactory.h">
+      <Filter>ヘッダー ファイル\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h">
+      <Filter>ヘッダー ファイル\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h">
+      <Filter>ヘッダー ファイル\Key</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Others\EnumToIndex.h">
+      <Filter>ヘッダー ファイル\Others</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
