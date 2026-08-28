@@ -25,11 +25,12 @@
     <Filter Include="ヘッダー ファイル\Others">
       <UniqueIdentifier>{a6af0541-d8d4-400b-ba2e-87893485dcc3}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Entry\Entry.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
+    <Filter Include="ヘッダー ファイル\Bit">
+      <UniqueIdentifier>{387009e3-246d-4330-82ec-63ae9a5a34c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\DirectX">
+      <UniqueIdentifier>{4065fc88-cdc9-49e2-8122-27068bd79776}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -44,8 +45,28 @@
     <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h">
       <Filter>ヘッダー ファイル\Key</Filter>
     </ClInclude>
+    <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h">
+      <Filter>ヘッダー ファイル\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Others\NonCopyableBase.h">
+      <Filter>ヘッダー ファイル\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Others\CircularIndex.h">
+      <Filter>ヘッダー ファイル\Others</Filter>
+    </ClInclude>
     <ClInclude Include="ItemsHeader\Others\EnumToIndex.h">
       <Filter>ヘッダー ファイル\Others</Filter>
     </ClInclude>
+    <ClInclude Include="ItemsHeader\Bit\BitFlag.h">
+      <Filter>ヘッダー ファイル\Bit</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Entry\Entry.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

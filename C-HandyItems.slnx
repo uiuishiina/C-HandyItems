@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="B:/Visual_Studio/C-HandyItems/C-HandyItems.vcxproj" Id="c0a68b02-fb14-47af-b312-18d403f5a068" />
+  <Project Path="C-HandyItems.vcxproj" Id="c0a68b02-fb14-47af-b312-18d403f5a068" />
 </Solution>

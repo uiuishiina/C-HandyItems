@@ -141,14 +141,19 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Entry\Entry.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="ItemsHeader\Bit\BitFlag.h" />
+    <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h" />
     <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h" />
+    <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h" />
     <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h" />
     <ClInclude Include="ItemsHeader\Log\LogStruct.h" />
     <ClInclude Include="ItemsHeader\Log\LogStructFactory.h" />
+    <ClInclude Include="ItemsHeader\Others\CircularIndex.h" />
     <ClInclude Include="ItemsHeader\Others\EnumToIndex.h" />
+    <ClInclude Include="ItemsHeader\Others\NonCopyableBase.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Entry\Entry.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
