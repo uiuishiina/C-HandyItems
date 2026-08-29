@@ -31,6 +31,9 @@
     <Filter Include="ヘッダー ファイル\DirectX">
       <UniqueIdentifier>{4065fc88-cdc9-49e2-8122-27068bd79776}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\ID">
+      <UniqueIdentifier>{782070f3-cab1-4ce3-a77a-a057a6c73782}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -62,6 +65,15 @@
     </ClInclude>
     <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h">
       <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\ID\IDBase.h">
+      <Filter>ヘッダー ファイル\ID</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Key\FeistelKeyConverter.h">
+      <Filter>ヘッダー ファイル\Key</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Container\KeyMap.h">
+      <Filter>ヘッダー ファイル\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

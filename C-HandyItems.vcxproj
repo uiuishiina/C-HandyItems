@@ -142,9 +142,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Bit\BitFlag.h" />
+    <ClInclude Include="ItemsHeader\Container\KeyMap.h" />
     <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h" />
     <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h" />
     <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h" />
+    <ClInclude Include="ItemsHeader\ID\IDBase.h" />
+    <ClInclude Include="ItemsHeader\Key\FeistelKeyConverter.h" />
     <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h" />
     <ClInclude Include="ItemsHeader\Log\LogStruct.h" />
     <ClInclude Include="ItemsHeader\Log\LogStructFactory.h" />
