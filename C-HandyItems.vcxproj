@@ -146,14 +146,16 @@
     <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h" />
     <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h" />
     <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h" />
+    <ClInclude Include="ItemsHeader\Enum\EnumArray.h" />
+    <ClInclude Include="ItemsHeader\Enum\EnumToIndex.h" />
     <ClInclude Include="ItemsHeader\ID\IDBase.h" />
     <ClInclude Include="ItemsHeader\Key\FeistelKeyConverter.h" />
     <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h" />
     <ClInclude Include="ItemsHeader\Log\LogStruct.h" />
     <ClInclude Include="ItemsHeader\Log\LogStructFactory.h" />
     <ClInclude Include="ItemsHeader\Others\CircularIndex.h" />
-    <ClInclude Include="ItemsHeader\Others\EnumToIndex.h" />
     <ClInclude Include="ItemsHeader\Others\NonCopyableBase.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry\Entry.cpp" />

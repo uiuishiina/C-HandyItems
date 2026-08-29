@@ -1,5 +1,5 @@
 #pragma once
-#include"../Others/EnumToIndex.h"
+#include"../Enum/EnumToIndex.h"
 #include<bitset>
 
 /// <summary>
@@ -7,28 +7,13 @@
 /// </summary>
 namespace bit {
 
-	namespace concepts {
-
-		/// <summary>
-		/// Bitフラグクラス用コンセプト
-		/// </summary>
-		/// <details>
-		/// [ 列挙体 ] かつ [ Countが定義されている ]
-		/// </details>
-		template<typename T>
-		concept EnumHasCount =
-			std::is_enum_v<T> &&
-			requires { T::Count; };
-
-	}
-
 	/* ========== ビットフラグクラス定義 ========== */
 
 	/// <summary>
 	/// ビットフラグクラス
 	/// </summary>
 	/// <typeparam name="T">Bitフラグに使う列挙体の型</typeparam>
-	template<concepts::EnumHasCount T>
+	template<Enum::concepts::EnumHasCount T>
 	class BitFlag 
 	{
 	public:

@@ -34,6 +34,9 @@
     <Filter Include="ヘッダー ファイル\ID">
       <UniqueIdentifier>{782070f3-cab1-4ce3-a77a-a057a6c73782}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Enum">
+      <UniqueIdentifier>{d74d2cbf-f85b-4aaa-a7ba-8cf7ecc1d82f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -57,9 +60,6 @@
     <ClInclude Include="ItemsHeader\Others\CircularIndex.h">
       <Filter>ヘッダー ファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="ItemsHeader\Others\EnumToIndex.h">
-      <Filter>ヘッダー ファイル\Others</Filter>
-    </ClInclude>
     <ClInclude Include="ItemsHeader\Bit\BitFlag.h">
       <Filter>ヘッダー ファイル\Bit</Filter>
     </ClInclude>
@@ -74,6 +74,15 @@
     </ClInclude>
     <ClInclude Include="ItemsHeader\Container\KeyMap.h">
       <Filter>ヘッダー ファイル\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Enum\EnumToIndex.h">
+      <Filter>ヘッダー ファイル\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Enum\EnumArray.h">
+      <Filter>ヘッダー ファイル\Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

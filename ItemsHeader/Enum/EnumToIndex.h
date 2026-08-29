@@ -2,9 +2,9 @@
 #include<concepts>
 
 /// <summary>
-/// その他名前空間
+/// 列挙体名前空間
 /// </summary>
-namespace others {
+namespace Enum {
 
 	/// <summary>
 	/// テンプレートコンセプト定義用名前空間
@@ -16,6 +16,18 @@ namespace others {
 		/// </summary>
 		template<typename T>
 		concept IsEnum = std::is_enum_v<T>;
+
+		/// <summary>
+		/// 列挙体カウントコンセプト
+		/// </summary>
+		/// <details>
+		/// [ 列挙体 ] かつ [ Countが定義されている ]
+		/// 定義されている数を数えるために作成
+		/// </details>
+		template<typename T>
+		concept EnumHasCount = std::is_enum_v <T>
+			&& requires { T::Count; };
+
 	}
 	
 	/// <summary>

@@ -15,7 +15,12 @@ int main() {
 
 	key::FeistelKeyConverter<A, B> converter{};
 	A original{};
+	A a{};
 	original.key_value = 0x1;
+	a.key_value = 0x2;
+
+	cout << converter.encode_key(original).key_value << endl;
+	cout << converter.encode_key(a).key_value << endl;
 
 	container::KeyMap<A,B,bool,key::FeistelKeyConverter<A,B>> con{};
 	if (con.add_value(original, true)) {
