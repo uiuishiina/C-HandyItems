@@ -2,107 +2,244 @@
 #include"UnorderedMapBase.h"
 #include"../Key/KeyConverterBase.h"
 
-
 /// <summary>
-/// コンテナ用名前空間
+/// 便利アイテム名前空間
 /// </summary>
-namespace container {
+namespace HandyItem {
 
 	/// <summary>
-	/// 重複なしキー変換保存クラス
+	/// コンテナ用名前空間
 	/// </summary>
-	/// <details>
-	/// ハッシュにキー変換を利用するクラス
-	/// </details>
-	/// <typeparam name="Encode">エンコードするキー</typeparam>
-	/// <typeparam name="Decode">エンコードされたキー</typeparam>
-	/// <typeparam name="Value">保存する型</typeparam>
-	/// <typeparam name="Converter">キー変換派生クラス</typeparam>
-	template<
-		typename Key,
-		typename EncodedKey,
-		typename Value,
-		typename Converter
-	>
-	requires key::concepts::KeyConverter<Converter, Key, EncodedKey>
-	class KeyMap
-	{
-	public:
-		/* ===== メンバー関数 ===== */
+	namespace container {
 
 		/// <summary>
-		/// コンストラクタ
+		/// ハンドル名前空間
 		/// </summary>
-		KeyMap() = default;
+		namespace handle {
 
-		/// <summary>
-		/// デストラクタ
-		/// </summary>
-		~KeyMap() = default;
+			/* ========== 汎用基底キー定義 ========== */
 
-		/// <summary>
-		/// コンテナ追加関数
-		/// </summary>
-		/// <param name="key">登録するキー</param>
-		/// <param name="value">追加する値</param>
-		/// <returns>追加の成否</returns>
-		[[nodiscard]] bool add_value(const Key& key, const Value& value) {
+			/// <summary>
+			/// 倫理側基底キー
+			/// </summary>
+			struct LogicalKey : public key::DefaultKey {
 
-			return map_.add_value(encode_key(key).key_value, std::move(value));
+				/// <summary>
+				/// コンストラクタ
+				/// </summary>
+				LogicalKey() = default;
+
+				/// <summary>
+				/// 引数付きコンストラクタ
+				/// </summary>
+				/// <param name="key">キーに入れる値</param>
+				LogicalKey(std::uint32_t key) :
+					DefaultKey(key) {}
+			};
+
+			/// <summary>
+			/// 保存側基底キー
+			/// </summary>
+			struct EncodedKey : public key::DefaultKey {
+
+				/// <summary>
+				/// コンストラクタ
+				/// </summary>
+				EncodedKey() = default;
+
+				/// <summary>
+				/// 引数付きコンストラクタ
+				/// </summary>
+				/// <param name="key">キーに入れる値</param>
+				EncodedKey(std::uint32_t key) :
+					DefaultKey(key) {}
+			};
+
+
+			/* ========== 汎用基底ハンドル定義 ========== */
+
+			/// <summary>
+			/// ハンドル基底構造体
+			/// </summary>
+			/// <typeparam name="T">保存している型</typeparam>
+			/// <typeparam name="Key">保存側派生キーの型</typeparam>
+			template<typename T, typename Key>
+				requires std::derived_from<Key, EncodedKey>
+			struct HandleBase {
+				T handle_{};
+				Key handle_key{};
+			};
+
+			/// <summary>
+			/// ポインターハンドル基底構造体
+			/// </summary>
+			/// <typeparam name="T">保存している型</typeparam>
+			/// <typeparam name="Key">保存側派生キーの型</typeparam>
+			template<typename T, typename Key>
+				requires std::derived_from<Key, EncodedKey>
+			struct HandlePtrBase {
+				T* handle_p{};
+				Key handle_key{};
+			};
+
 		}
 
-		/// <summary>
-		/// コンテナ取得関数
-		/// </summary>
-		/// <param name="key">探索するキー</param>
-		/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
-		[[nodiscard]] std::optional<Value> get_value(const Key& key) const noexcept {
 
-			return map_.get_value(encode_key(key).key_value);
-		}
+		/* ========== キーマップコンテナクラス定義 ========== */
 
 		/// <summary>
-		/// コンテナ取得オーバーロード関数
+		/// キーマップコンテナクラス
 		/// </summary>
-		/// <param name="encode_key">エンコードされたキー</param>
-		/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
-		[[nodiscard]] std::optional<Value> get_value(const EncodedKey& encode_key) const noexcept {
+		/// <details>
+		/// ハッシュにキー変換を利用するクラス
+		/// </details>
+		/// <typeparam name="LogicalKeyT">倫理側派生キー</typeparam>
+		/// <typeparam name="Decode">保存側派生キー</typeparam>
+		/// <typeparam name="Value">保存する型</typeparam>
+		/// <typeparam name="Converter">キー変換派生クラス</typeparam>
+		template<
+			typename LogicalKeyT,
+			typename EncodedKeyT,
+			typename Value,
+			typename Converter
+		>
+		requires 
+			std::derived_from<LogicalKeyT,handle::LogicalKey> &&
+			std::derived_from<EncodedKeyT,handle::EncodedKey> &&
+			key::concepts::KeyConverter<Converter, LogicalKeyT, EncodedKeyT>
+		class KeyMap
+		{
+		public:
+			/* ========== メンバー関数 ========== */
 
-			return map_.get_value(encode_key.key_value);
-		}
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			KeyMap() = default;
 
-		/// <summary>
-		/// エンコード関数
-		/// </summary>
-		/// <param name="key">エンコードしたいキー</param>
-		/// <returns>エンコードされたキー</returns>
-		[[nodiscard]] EncodedKey encode_key(const Key& key)const noexcept {
+			/// <summary>
+			/// デストラクタ
+			/// </summary>
+			~KeyMap() = default;
 
-			return converter_.encode_key(key);
-		}
 
-		/// <summary>
-		/// デコード関数
-		/// </summary>
-		/// <param name="encode_key">デコードしたいキー</param>
-		/// <returns>デコードされたキー</returns>
-		[[nodiscard]] Key decode_key(const Key& encode_key)const noexcept {
+			/* ========== 追加関数 ========== */
 
-			return converter_.decode_key(encode_key);
-		}
+			/// <summary>
+			/// 値追加関数
+			/// </summary>
+			/// <param name="key">登録するキー</param>
+			/// <param name="value">追加する値</param>
+			/// <returns>追加の成否</returns>
+			[[nodiscard]] bool add_value(const LogicalKeyT& key, Value&& value) {
 
-	private:
-		/* ===== メンバー変数 ===== */
+				return map_.add_value(encode_key(key).key_value, std::move(value));
+			}
 
-		/// <summary>
-		/// 保存するマップ
-		/// </summary>
-		UnorderedMapBase<std::uint32_t, Value> map_{};
 
-		/// <summary>
-		/// キー変換クラス
-		/// </summary>
-		Converter converter_{};
+			/* ========== 取得関数 ========== */
 
-	};
+			/* ===== 参照 ===== */
+
+			/// <summary>
+			/// 値取得関数
+			/// </summary>
+			/// <param name="encode_key">エンコードされたキー</param>
+			/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
+			[[nodiscard]] std::optional<Value> get_value(const EncodedKeyT& encodekey) noexcept {
+
+				return map_.get_value(encodekey.key_value);
+			}
+
+			[[nodiscard]] std::optional<Value> get_value(const EncodedKeyT& encodekey) const noexcept {
+
+				return map_.get_value(encodekey.key_value);
+			}
+
+			/// <summary>
+			/// 値取得オーバーロード関数
+			/// </summary>
+			/// <param name="key">エンコードするキー</param>
+			/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
+			[[nodiscard]] std::optional<Value> get_value(const LogicalKeyT& key) noexcept {
+
+				return map_.get_value(encode_key(key).key_value);
+			}
+
+			[[nodiscard]] std::optional<Value> get_value(const LogicalKeyT& key) const noexcept {
+
+				return map_.get_value(encode_key(key).key_value);
+			}
+
+
+			/* ===== ポインター ===== */
+
+			/// <summary>
+			/// 値ポインター取得関数
+			/// </summary>
+			/// <param name="key">探索するキー</param>
+			/// <returns>取得した値... ないなら [ nullptr ]</returns>
+			[[nodiscard]] Value* get_value_p(const EncodedKeyT& encodekey) noexcept {
+
+				return map_.get_value_p(encodekey.key_value);
+			}
+
+			[[nodiscard]] const Value* get_value_p(const EncodedKeyT& encodekey) const noexcept {
+
+				return map_.get_value_p(encodekey.key_value);
+			}
+
+			/// <summary>
+			/// 値ポインター取得関数
+			/// </summary>
+			/// <param name="key">探索するキー</param>
+			/// <returns>取得した値... ないなら [ nullptr ]</returns>
+			[[nodiscard]] Value* get_value_p(const EncodedKeyT& encodekey) noexcept {
+
+				return map_.get_value_p(encodekey.key_value);
+			}
+
+			[[nodiscard]] const Value* get_value_p(const EncodedKeyT& encodekey) const noexcept {
+
+				return map_.get_value_p(encodekey.key_value);
+			}
+
+
+			/* ===== その他 ===== */
+
+			/// <summary>
+			/// エンコード関数
+			/// </summary>
+			/// <param name="key">エンコードしたいキー</param>
+			/// <returns>エンコードされたキー</returns>
+			[[nodiscard]] EncodedKeyT encode_key(const LogicalKeyT& key) const noexcept {
+
+				return converter_.encode_key(encode_key(key).key_value);
+			}
+
+			/// <summary>
+			/// デコード関数
+			/// </summary>
+			/// <param name="encode_key">デコードしたいキー</param>
+			/// <returns>デコードされたキー</returns>
+			[[nodiscard]] LogicalKeyT decode_key(const EncodedKeyT& encodekey)const noexcept {
+
+				return converter_.decode_key(encodekey);
+			}
+
+		private:
+			/* ===== メンバー変数 ===== */
+
+			/// <summary>
+			/// 保存するマップ
+			/// </summary>
+			UnorderedMapBase<std::uint32_t, Value> map_{};
+
+			/// <summary>
+			/// キー変換クラス
+			/// </summary>
+			Converter converter_{};
+
+		};
+	}
 }

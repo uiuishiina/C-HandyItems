@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Bit\BitFlag.h" />
+    <ClInclude Include="ItemsHeader\Container\ExampleMap.h" />
     <ClInclude Include="ItemsHeader\Container\KeyMap.h" />
     <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h" />
     <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h" />
