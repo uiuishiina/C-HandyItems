@@ -87,6 +87,9 @@
     <ClInclude Include="ItemsHeader\Container\ExampleMap.h">
       <Filter>ヘッダー ファイル\Container</Filter>
     </ClInclude>
+    <ClInclude Include="ItemsHeader\Container\ReferenceContainerBase.h">
+      <Filter>ヘッダー ファイル\Container</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry\Entry.cpp">
