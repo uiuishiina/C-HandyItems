@@ -157,6 +157,7 @@
     <ClInclude Include="ItemsHeader\Log\LogStructFactory.h" />
     <ClInclude Include="ItemsHeader\Others\CircularIndex.h" />
     <ClInclude Include="ItemsHeader\Others\NonCopyableBase.h" />
+    <ClInclude Include="ItemsHeader\Tuple\TupleBase.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

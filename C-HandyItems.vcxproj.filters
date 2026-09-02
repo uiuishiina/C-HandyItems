@@ -37,6 +37,9 @@
     <Filter Include="ヘッダー ファイル\Enum">
       <UniqueIdentifier>{d74d2cbf-f85b-4aaa-a7ba-8cf7ecc1d82f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Tuple">
+      <UniqueIdentifier>{21631b71-906b-43ef-82e2-9334fbc985ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="ItemsHeader\Container\ReferenceContainerBase.h">
       <Filter>ヘッダー ファイル\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Tuple\TupleBase.h">
+      <Filter>ヘッダー ファイル\Tuple</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
