@@ -40,6 +40,9 @@
     <Filter Include="ヘッダー ファイル\Tuple">
       <UniqueIdentifier>{21631b71-906b-43ef-82e2-9334fbc985ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Windows">
+      <UniqueIdentifier>{35566bbd-0f79-426d-8892-0ec46daba298}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -95,6 +98,12 @@
     </ClInclude>
     <ClInclude Include="ItemsHeader\Tuple\TupleBase.h">
       <Filter>ヘッダー ファイル\Tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Windows\windowBase.h">
+      <Filter>ヘッダー ファイル\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\DirectX\Transform.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
