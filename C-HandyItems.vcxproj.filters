@@ -43,6 +43,18 @@
     <Filter Include="ヘッダー ファイル\Windows">
       <UniqueIdentifier>{35566bbd-0f79-426d-8892-0ec46daba298}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Math">
+      <UniqueIdentifier>{5d608ad3-3404-425e-9f4f-5a096eac13e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math\Matrix">
+      <UniqueIdentifier>{bb6dc691-ad9f-4dd3-a9c1-1f82321be23d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math\BaseStruct">
+      <UniqueIdentifier>{441a8835-9739-4893-b7d1-5b1617014397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math\Function">
+      <UniqueIdentifier>{1d007f18-d88b-490e-a7f1-dcc3f99acd8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemsHeader\Log\LogStruct.h">
@@ -68,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="ItemsHeader\Bit\BitFlag.h">
       <Filter>ヘッダー ファイル\Bit</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="ItemsHeader\ID\IDBase.h">
       <Filter>ヘッダー ファイル\ID</Filter>
@@ -102,8 +111,29 @@
     <ClInclude Include="ItemsHeader\Windows\windowBase.h">
       <Filter>ヘッダー ファイル\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="ItemsHeader\DirectX\Transform.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+    <ClInclude Include="ItemsHeader\Math\Matrix\DirectXMatrix.h">
+      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\Matrix\MatrixBase.h">
+      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float2.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\Function\MathF.h">
+      <Filter>ヘッダー ファイル\Math\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\Function\MathFFloat2.h">
+      <Filter>ヘッダー ファイル\Math\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float3.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float4.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Matrix.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

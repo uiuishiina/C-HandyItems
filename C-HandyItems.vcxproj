@@ -147,8 +147,6 @@
     <ClInclude Include="ItemsHeader\Container\ReferenceContainerBase.h" />
     <ClInclude Include="ItemsHeader\Container\UnorderedMapBase.h" />
     <ClInclude Include="ItemsHeader\Container\ReferenceQueue.h" />
-    <ClInclude Include="ItemsHeader\DirectX\DirectXMatrix.h" />
-    <ClInclude Include="ItemsHeader\DirectX\Transform.h" />
     <ClInclude Include="ItemsHeader\Enum\EnumArray.h" />
     <ClInclude Include="ItemsHeader\Enum\EnumToIndex.h" />
     <ClInclude Include="ItemsHeader\ID\IDBase.h" />
@@ -156,6 +154,14 @@
     <ClInclude Include="ItemsHeader\Key\KeyConverterBase.h" />
     <ClInclude Include="ItemsHeader\Log\LogStruct.h" />
     <ClInclude Include="ItemsHeader\Log\LogStructFactory.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float2.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float3.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Float4.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Matrix.h" />
+    <ClInclude Include="ItemsHeader\Math\Function\MathF.h" />
+    <ClInclude Include="ItemsHeader\Math\Function\MathFFloat2.h" />
+    <ClInclude Include="ItemsHeader\Math\Matrix\DirectXMatrix.h" />
+    <ClInclude Include="ItemsHeader\Math\Matrix\MatrixBase.h" />
     <ClInclude Include="ItemsHeader\Others\CircularIndex.h" />
     <ClInclude Include="ItemsHeader\Others\NonCopyableBase.h" />
     <ClInclude Include="ItemsHeader\Tuple\TupleBase.h" />
