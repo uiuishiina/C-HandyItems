@@ -2,6 +2,7 @@
 #include"MathF.h"
 #include"../BaseStruct/Matrix.h"
 #include"../BaseStruct/Float3.h"
+#include<optional>
 
 /// <summary>
 /// 便利アイテム名前空間
@@ -59,6 +60,13 @@ namespace HandyItem {
 				const Matrix& matrix
 			) {
 
+				/*
+					a,b,c,d
+					e,f,g,h
+					i,j,k,l
+					m,n,o,p
+				*/
+
 				const float a = matrix[0][0];
 				const float b = matrix[0][1];
 				const float c = matrix[0][2];
@@ -111,7 +119,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="matrix">対象行列</param>
 			/// <returns>逆行列</returns>
-			[[nodiscard]] inline Matrix inverse(
+			[[nodiscard]] inline std::optional<Matrix> inverse(
 				const Matrix& matrix
 			) {
 
@@ -119,7 +127,7 @@ namespace HandyItem {
 
 				//	逆行列を持たない
 				if (det == 0.0f) {
-					return identity();
+					return std::nullopt;
 				}
 
 				Matrix result{};
@@ -214,6 +222,7 @@ namespace HandyItem {
 			[[nodiscard]] inline Matrix scale(
 				const Float3& scale
 			) {
+
 				return Matrix{ scale };
 			}
 
