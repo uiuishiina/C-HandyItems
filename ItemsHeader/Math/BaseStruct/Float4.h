@@ -74,7 +74,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z、3: W）</param>
 			/// <returns>指定した要素への参照</returns>
-			[[nodiscard]] float& operator[](std::size_t index) {
+			[[nodiscard]] float& operator[](
+				std::size_t index
+				) {
+
 				assert(index < 4 && "Float4 index out of range");
 				switch (index)
 				{
@@ -94,7 +97,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z、3: W）</param>
 			/// <returns>指定した要素へのConst参照</returns>
-			[[nodiscard]] const float& operator[](std::size_t index) const {
+			[[nodiscard]] const float& operator[](
+				std::size_t index
+				) const {
+
 				assert(index < 4 && "Float4 index out of range");
 				switch (index)
 				{
@@ -116,7 +122,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>加算結果</returns>
-			[[nodiscard]] Float4 operator + (const Float4& right) const {
+			[[nodiscard]] Float4 operator + (
+				const Float4& right
+				) const {
+
 				return {
 					x_ + right.x_,
 					y_ + right.y_,
@@ -130,7 +139,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>加算後の自身参照</returns>
-			Float4& operator += (const Float4& right) {
+			Float4& operator += (
+				const Float4& right
+				) {
+
 				x_ += right.x_;
 				y_ += right.y_;
 				z_ += right.z_;
@@ -146,7 +158,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>減算結果</returns>
-			[[nodiscard]] Float4 operator - (const Float4& right) const {
+			[[nodiscard]] Float4 operator - (
+				const Float4& right
+				) const {
+
 				return {
 					x_ - right.x_,
 					y_ - right.y_,
@@ -160,7 +175,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>減算後の自身参照</returns>
-			Float4& operator -= (const Float4& right) {
+			Float4& operator -= (
+				const Float4& right
+				) {
+
 				x_ -= right.x_;
 				y_ -= right.y_;
 				z_ -= right.z_;
@@ -176,7 +194,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算結果</returns>
-			[[nodiscard]] Float4 operator * (const Float4& right) const {
+			[[nodiscard]] Float4 operator * (
+				const Float4& right
+				) const {
+
 				return {
 					x_ * right.x_,
 					y_ * right.y_,
@@ -190,7 +211,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算後の自身参照</returns>
-			Float4& operator *= (const Float4& right) {
+			Float4& operator *= (
+				const Float4& right
+				) {
+
 				x_ *= right.x_;
 				y_ *= right.y_;
 				z_ *= right.z_;
@@ -204,7 +228,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算結果</returns>
-			[[nodiscard]] Float4 operator * (float right) const {
+			[[nodiscard]] Float4 operator * (
+				float right
+				) const {
+
 				return {
 					x_ * right,
 					y_ * right,
@@ -218,7 +245,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算後の自身参照</returns>
-			Float4& operator *= (float right) {
+			Float4& operator *= (
+				float right
+				) {
+
 				x_ *= right;
 				y_ *= right;
 				z_ *= right;
@@ -235,7 +265,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算結果</returns>
-			[[nodiscard]] Float4 operator / (const Float4& right) const {
+			[[nodiscard]] Float4 operator / (
+				const Float4& right
+				) const {
+
 				return {
 					x_ / right.x_,
 					y_ / right.y_,
@@ -249,7 +282,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算後の自身参照</returns>
-			Float4& operator /= (const Float4& right) {
+			Float4& operator /= (
+				const Float4& right
+				) {
+
 				x_ /= right.x_;
 				y_ /= right.y_;
 				z_ /= right.z_;
@@ -263,7 +299,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算結果</returns>
-			[[nodiscard]] Float4 operator / (float right) const {
+			[[nodiscard]] Float4 operator / (
+				float right
+				) const {
+
 				return {
 					x_ / right,
 					y_ / right,
@@ -277,7 +316,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算後の自身参照</returns>
-			Float4& operator /= (float right) {
+			Float4& operator /= (
+				float right
+				) {
+
 				x_ /= right;
 				y_ /= right;
 				z_ /= right;
@@ -293,7 +335,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>比較結果</returns>
-			[[nodiscard]] bool operator == (const Float4& right) const {
+			[[nodiscard]] bool operator == (
+				const Float4& right
+				) const {
+
 				return (
 					x_ == right.x_ && 
 					y_ == right.y_ && 
@@ -307,7 +352,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>比較結果</returns>
-			[[nodiscard]] bool operator != (const Float4& right) const {
+			[[nodiscard]] bool operator != (
+				const Float4& right
+				) const {
+
 				return !(*this == right);
 			}
 
@@ -318,12 +366,69 @@ namespace HandyItem {
 			/// </summary>
 			/// <returns></returns>
 			Float4 operator - () const {
+
 				return {
 					-x_,
 					-y_,
 					-z_,
 					-w_
 				};
+			}
+
+
+			/* -- 数学系関数 -- */
+
+			/// <summary>
+			/// 二乗距離計算関数
+			/// </summary>
+			/// <returns>距離の二乗</returns>
+			[[nodiscard]] float length_squared() const {
+
+				return (
+					x_ * x_ +
+					y_ * y_ +
+					z_ * z_ +
+					w_ * w_
+					);
+			}
+
+			/// <summary>
+			/// 距離計算関数
+			/// </summary>
+			/// <returns>距離</returns>
+			[[nodiscard]] float length() const {
+
+				return MathF::sqrt(length_squared());
+			}
+
+			/// <summary>
+			/// 正規化関数
+			/// </summary>
+			/// <returns>正規化後の自身参照</returns>
+			Float4& normalize() {
+
+				const auto length = this->length();
+
+				if (length != 0.0f) {
+					*this /= length;
+				}
+
+				return *this;
+			}
+
+			/// <summary>
+			/// 正規化取得関数
+			/// </summary>
+			/// <returns>正規化された値</returns>
+			[[nodiscard]] Float4 normalized() const {
+
+				const auto length = this->length();
+
+				if (length != 0.0f) {
+					return *this / length;
+				}
+
+				return *this;
 			}
 
 		};

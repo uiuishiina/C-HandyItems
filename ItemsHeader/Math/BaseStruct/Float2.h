@@ -46,7 +46,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="x">[ X ] の値</param>
 			/// <param name="y">[ Y ] の値</param>
-			Float2(float x,float y):
+			Float2(
+				float x,
+				float y
+			):
 				x_{x},y_{y}{}
 
 
@@ -59,7 +62,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y）</param>
 			/// <returns>指定した要素への参照</returns>
-			[[nodiscard]] float& operator[](std::size_t index) {
+			[[nodiscard]] float& operator[](
+				std::size_t index
+				) {
+
 				assert(index < 2 && "Float2 index out of range");
 				return 0 == index ? x_ : y_;
 			}
@@ -69,7 +75,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y）</param>
 			/// <returns>指定した要素へのConst参照</returns>
-			[[nodiscard]] const float& operator[](std::size_t index) const {
+			[[nodiscard]] const float& operator[](
+				std::size_t index
+				) const {
+
 				assert(index < 2 && "Float2 index out of range");
 				return 0 == index ? x_ : y_;
 			}
@@ -81,7 +90,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>加算結果</returns>
-			[[nodiscard]] Float2 operator + (const Float2& right) const {
+			[[nodiscard]] Float2 operator + (
+				const Float2& right
+				) const {
+
 				return {
 					x_ + right.x_,
 					y_ + right.y_
@@ -93,7 +105,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>加算後の自身参照</returns>
-			Float2& operator += (const Float2& right) {
+			Float2& operator += (
+				const Float2& right
+				) {
+
 				x_ += right.x_;
 				y_ += right.y_;
 
@@ -107,7 +122,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>減算結果</returns>
-			[[nodiscard]] Float2 operator - (const Float2& right) const {
+			[[nodiscard]] Float2 operator - (
+				const Float2& right
+				) const {
+
 				return { 
 					x_ - right.x_,
 					y_ - right.y_ 
@@ -119,7 +137,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>減算後の自身参照</returns>
-			Float2& operator -= (const Float2& right) {
+			Float2& operator -= (
+				const Float2& right
+				) {
+
 				x_ -= right.x_;
 				y_ -= right.y_;
 
@@ -133,7 +154,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算結果</returns>
-			[[nodiscard]] Float2 operator * (const Float2& right) const {
+			[[nodiscard]] Float2 operator * (
+				const Float2& right
+				) const {
+
 				return {
 					x_ * right.x_,
 					y_ * right.y_
@@ -145,7 +169,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算後の自身参照</returns>
-			Float2& operator *= (const Float2& right) {
+			Float2& operator *= (
+				const Float2& right
+				) {
+
 				x_ *= right.x_;
 				y_ *= right.y_;
 
@@ -157,7 +184,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算結果</returns>
-			[[nodiscard]] Float2 operator * (float right) const {
+			[[nodiscard]] Float2 operator * (
+				float right
+				) const {
+
 				return {
 					x_ * right,
 					y_ * right
@@ -169,7 +199,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>乗算後の自身参照</returns>
-			Float2& operator *= (float right) {
+			Float2& operator *= (
+				float right
+				) {
+
 				x_*= right;
 				y_*= right;
 
@@ -184,7 +217,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算結果</returns>
-			[[nodiscard]] Float2 operator / (const Float2& right) const {
+			[[nodiscard]] Float2 operator / (
+				const Float2& right
+				) const {
+
 				return {
 					x_ / right.x_,
 					y_ / right.y_
@@ -196,7 +232,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算後の自身参照</returns>
-			Float2& operator /= (const Float2& right) {
+			Float2& operator /= (
+				const Float2& right
+				) {
+
 				x_ /= right.x_;
 				y_ /= right.y_;
 
@@ -208,7 +247,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算結果</returns>
-			[[nodiscard]] Float2 operator / (float right) const {
+			[[nodiscard]] Float2 operator / (
+				float right
+				) const {
+
 				return {
 					x_ / right,
 					y_ / right
@@ -220,7 +262,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>除算後の自身参照</returns>
-			Float2& operator /= (float right) {
+			Float2& operator /= (
+				float right
+				) {
+
 				x_ /= right;
 				y_ /= right;
 
@@ -234,8 +279,14 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>比較結果</returns>
-			[[nodiscard]] bool operator == (const Float2& right) const {
-				return x_ == right.x_ && y_ == right.y_;
+			[[nodiscard]] bool operator == (
+				const Float2& right
+				) const {
+
+				return (
+					x_ == right.x_ && 
+					y_ == right.y_
+					);
 			}
 
 			/// <summary>
@@ -243,7 +294,10 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="right">右辺値</param>
 			/// <returns>比較結果</returns>
-			[[nodiscard]] bool operator != (const Float2& right) const {
+			[[nodiscard]] bool operator != (
+				const Float2& right
+				) const {
+
 				return !(*this == right);
 			}
 
@@ -254,6 +308,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <returns></returns>
 			Float2 operator - () const {
+
 				return {
 					-x_,
 					-y_
@@ -268,7 +323,11 @@ namespace HandyItem {
 			/// </summary>
 			/// <returns>距離の二乗</returns>
 			[[nodiscard]] float length_squared() const {
-				return x_ * x_ + y_ * y_;
+
+				return (
+					x_ * x_ +
+					y_ * y_
+					);
 			}
 
 			/// <summary>
@@ -276,6 +335,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <returns>距離</returns>
 			[[nodiscard]] float length() const {
+
 				return MathF::sqrt(length_squared());
 			}
 
@@ -298,12 +358,12 @@ namespace HandyItem {
 			/// 正規化取得関数
 			/// </summary>
 			/// <returns>正規化された値</returns>
-			[[nodiscard]] Float2& normalized() {
+			[[nodiscard]] Float2 normalized() const {
 
 				const auto length = this->length();
 
 				if (length != 0.0f) {
-					return *this /= length;
+					return *this / length;
 				}
 
 				return *this;
