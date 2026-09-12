@@ -1,7 +1,8 @@
 #pragma once
 #include"MathF.h"
-#include"../BaseStruct/Matrix.h"
 #include"../BaseStruct/Float3.h"
+#include"../BaseStruct/Quaternion.h"
+#include"../BaseStruct/Matrix.h"
 #include<optional>
 
 /// <summary>
@@ -29,6 +30,62 @@ namespace HandyItem {
 				return {};
 			}
 
+			/// <summary>
+			/// クォータニオンから回転行列を作成する関数
+			/// </summary>
+			/// <param name="quaternion">対象クォータニオン</param>
+			/// <returns>回転行列</returns>
+			[[nodiscard]] inline Matrix to_matrix(
+				const Quaternion& quaternion
+			) {
+
+				const float x = quaternion.x_;
+				const float y = quaternion.y_;
+				const float z = quaternion.z_;
+				const float w = quaternion.w_;
+
+				const float xx = x * x;
+				const float yy = y * y;
+				const float zz = z * z;
+
+				const float xy = x * y;
+				const float xz = x * z;
+				const float yz = y * z;
+
+				const float wx = w * x;
+				const float wy = w * y;
+				const float wz = w * z;
+
+				return Matrix{
+					Float4{
+						1.0f - 2.0f * (yy + zz),
+						2.0f * (xy - wz),
+						2.0f * (xz + wy),
+						0.0f
+					},
+
+					Float4{
+						2.0f * (xy + wz),
+						1.0f - 2.0f * (xx + zz),
+						2.0f * (yz - wx),
+						0.0f
+					},
+
+					Float4{
+						2.0f * (xz - wy),
+						2.0f * (yz + wx),
+						1.0f - 2.0f * (xx + yy),
+						0.0f
+					},
+
+					Float4{
+						0.0f,
+						0.0f,
+						0.0f,
+						1.0f
+					}
+				};
+			}
 
 			/// <summary>
 			/// 転置行列計算関数
@@ -87,26 +144,23 @@ namespace HandyItem {
 				const float o = matrix[3][2];
 				const float p = matrix[3][3];
 
-				return
+				return 
 					a * (
 						f * (k * p - l * o) -
 						g * (j * p - l * n) +
 						h * (j * o - k * n)
-						)
-					-
-					b * (
+					)
+					- b * (
 						e * (k * p - l * o) -
 						g * (i * p - l * m) +
 						h * (i * o - k * m)
 						)
-					+
-					c * (
+					+ c * (
 						e * (j * p - l * n) -
 						f * (i * p - l * m) +
 						h * (i * n - j * m)
 						)
-					-
-					d * (
+					- d * (
 						e * (j * o - k * n) -
 						f * (i * o - k * m) +
 						g * (i * n - j * m)
@@ -118,15 +172,17 @@ namespace HandyItem {
 			/// 逆行列計算関数
 			/// </summary>
 			/// <param name="matrix">対象行列</param>
-			/// <returns>逆行列</returns>
+			/// <returns>逆行列...ないなら [ std::nullopt ]</returns>
 			[[nodiscard]] inline std::optional<Matrix> inverse(
 				const Matrix& matrix
 			) {
 
 				const float det = determinant(matrix);
 
-				//	逆行列を持たない
-				if (det == 0.0f) {
+				//	逆行列を持たないなら [ std::nullopt ]
+				constexpr float epsilon = 1.0e-6f;
+
+				if (MathF::abs(det) < epsilon) {
 					return std::nullopt;
 				}
 
@@ -168,21 +224,19 @@ namespace HandyItem {
 								minor[1][1] * minor[2][2] -
 								minor[1][2] * minor[2][1]
 								)
-							-
-							minor[0][1] * (
+							- minor[0][1] * (
 								minor[1][0] * minor[2][2] -
 								minor[1][2] * minor[2][0]
 								)
-							+
-							minor[0][2] * (
+							+ minor[0][2] * (
 								minor[1][0] * minor[2][1] -
 								minor[1][1] * minor[2][0]
 								);
 
-						const float cofactor =
-							((row + col) % 2 == 0)
-							? minor_det
-							: -minor_det;
+						const float cofactor = (
+							(row + col) % 2 == 0
+							) ?
+							minor_det : -minor_det;
 
 						//	余因子行列の転置 = 逆行列
 						result[col][row] = cofactor / det;
@@ -241,8 +295,8 @@ namespace HandyItem {
 
 				return Matrix{
 					Float4{ 1.0f, 0.0f, 0.0f, 0.0f },
-					Float4{ 0.0f, c,    -s,   0.0f },
-					Float4{ 0.0f, s,     c,   0.0f },
+					Float4{ 0.0f,    c,    s, 0.0f },
+					Float4{ 0.0f,   -s,    c, 0.0f },
 					Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
 				};
 			}
@@ -261,9 +315,9 @@ namespace HandyItem {
 				const float s = MathF::sin(radian);
 
 				return Matrix{
-					Float4{ c,    0.0f, s,    0.0f },
+					Float4{    c, 0.0f,   -s, 0.0f },
 					Float4{ 0.0f, 1.0f, 0.0f, 0.0f },
-					Float4{ -s,   0.0f, c,    0.0f },
+					Float4{    s, 0.0f,    c, 0.0f },
 					Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
 				};
 			}
@@ -282,8 +336,8 @@ namespace HandyItem {
 				const float s = MathF::sin(radian);
 
 				return Matrix{
-					Float4{ c,    -s,   0.0f, 0.0f },
-					Float4{ s,     c,   0.0f, 0.0f },
+					Float4{    c,    s, 0.0f, 0.0f },
+					Float4{   -s,    c, 0.0f, 0.0f },
 					Float4{ 0.0f, 0.0f, 1.0f, 0.0f },
 					Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
 				};

@@ -41,7 +41,10 @@ namespace HandyItem {
 			/// 参照追加関数
 			/// </summary>
 			/// <param name="value">追加する参照</param>
-			void add_reference(T& value) {
+			void add_reference(
+				T& value
+			) {
+
 				reference_queue.push(value);
 			}
 
@@ -52,7 +55,10 @@ namespace HandyItem {
 			/// <param name="value"></param>
 			template<std::ranges::range R>
 				requires std::same_as<std::remove_cvref_t<std::ranges::range_reference_t<R>>, T>
-			void add_references(R& value) {
+			void add_references(
+				R& value
+			) {
+
 				for (auto& p : value) {
 					reference_queue.push(p);
 				}
@@ -61,7 +67,7 @@ namespace HandyItem {
 			/// <summary>
 			/// 参照取得関数
 			/// </summary>
-			/// <returns>キューから取得した参照...ないなら[std::nullopt]</returns>
+			/// <returns>キューから取得した参照...ないなら [ std::nullopt ]</returns>
 			[[nodiscard]] std::optional<std::reference_wrapper<T>> get_reference() {
 
 				//	キューがあるか
@@ -82,6 +88,7 @@ namespace HandyItem {
 			/// 参照保存キュー
 			/// </summary>
 			std::queue<std::reference_wrapper<T>> reference_queue{};
+
 		};
 	}
 }

@@ -55,7 +55,9 @@ namespace HandyItem {
 				float y, 
 				float z
 			) :
-				x_{ x }, y_{ y }, z_{ z } {}
+				x_{ x },
+				y_{ y }, 
+				z_{ z } {}
 
 
 
@@ -68,7 +70,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z）</param>
 			/// <returns>指定した要素への参照</returns>
-			[[nodiscard]] float& operator[](
+			[[nodiscard]] float& operator [] (
 				std::size_t index
 				) {
 
@@ -89,7 +91,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z）</param>
 			/// <returns>指定した要素へのConst参照</returns>
-			[[nodiscard]] const float& operator[](
+			[[nodiscard]] const float& operator [] (
 				std::size_t index
 				) const {
 

@@ -32,7 +32,9 @@ namespace HandyItem {
 			/// 引数付きコンストラクタ
 			/// </summary>
 			/// <param name="value">設定する値</param>
-			DefaultKey(std::uint32_t value) :
+			DefaultKey(
+				std::uint32_t value
+			) :
 				key_value{ value } {}
 
 		};
@@ -86,14 +88,18 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="value">エンコードしたいキー</param>
 			/// <returns>エンコードされたキー</returns>
-			[[nodiscard]] virtual U encode_key(const T& value) const = 0;
+			[[nodiscard]] virtual U encode_key(
+				const T& value
+			) const = 0;
 
 			/// <summary>
 			/// デコード関数
 			/// </summary>
 			/// <param name="value">デコードしたいキー</param>
 			/// <returns>デコードされたキー</returns>
-			[[nodiscard]] virtual  T decode_key(const U& value) const = 0;
+			[[nodiscard]] virtual  T decode_key(
+				const U& value
+			) const = 0;
 
 		protected:
 			/* ===== メンバー変数 ===== */

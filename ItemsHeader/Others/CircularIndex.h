@@ -23,7 +23,9 @@ namespace others {
 		/// 引数付きコンストラクタ
 		/// </summary>
 		/// <param name="size">インデックスサイズ</param>
-		CircularIndex(size_t size) :
+		CircularIndex(
+			size_t size
+		) :
 			circle_size{ size } {
 			assert(circle_size > 0 && "circle_size Error");
 		}
@@ -37,7 +39,7 @@ namespace others {
 		/// 前置インクリメントオペレーター
 		/// </summary>
 		/// <returns>インクリメントした後の自身の参照</returns>
-		CircularIndex& operator++() noexcept {
+		CircularIndex& operator ++ () noexcept {
 			
 			++circle_index;
 			circle_index = circle_index % circle_size;
@@ -49,7 +51,7 @@ namespace others {
 		/// 前置デクリメントオペレーター
 		/// </summary>
 		/// <returns>デクリメントした後の自身の参照</returns>
-		CircularIndex& operator--() noexcept {
+		CircularIndex& operator -- () noexcept {
 
 			if (circle_index == 0) {
 				circle_index = circle_size - 1;
@@ -65,9 +67,11 @@ namespace others {
 		/// 後置インクリメントオペレーター
 		/// </summary>
 		/// <returns>インクリメントする前の自身の参照</returns>
-		CircularIndex operator++(int) noexcept {
+		CircularIndex operator ++ (int) noexcept {
+
 			auto old = *this;
 			++(*this);
+
 			return old;
 		}
 
@@ -75,9 +79,11 @@ namespace others {
 		/// 後置デンクリメントオペレーター
 		/// </summary>
 		/// <returns>デンクリメントする前の自身の参照</returns>
-		CircularIndex operator--(int) noexcept {
+		CircularIndex operator -- (int) noexcept {
+
 			auto old = *this;
 			--(*this);
+
 			return old;
 		}
 		
@@ -86,6 +92,7 @@ namespace others {
 		/// </summary>
 		/// <returns>インデックス</returns>
 		operator size_t()const noexcept {
+
 			return circle_index;
 		}
 

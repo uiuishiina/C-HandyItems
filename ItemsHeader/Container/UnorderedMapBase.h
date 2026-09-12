@@ -45,7 +45,11 @@ namespace HandyItem {
 			/// <param name="key">登録するキー</param>
 			/// <param name="value">追加する値</param>
 			/// <returns>追加の成否</returns>
-			bool add_value(const Key& key, Value&& value) {
+			bool add_value(
+				const Key& key, 
+				Value&& value
+			) {
+
 				return map_.emplace(key, std::move(value)).second;
 			}
 
@@ -59,7 +63,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">探索するキー</param>
 			/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
-			[[nodiscard]] std::optional<Value> get_value(const Key& key) noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const Key& key
+			) noexcept {
 
 				const auto it = map_.find(key);
 				if (it == map_.end()) {
@@ -69,7 +75,9 @@ namespace HandyItem {
 				return it->second;
 			}
 
-			[[nodiscard]] std::optional<Value> get_value(const Key& key) const noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const Key& key
+			) const noexcept {
 
 				const auto it = map_.find(key);
 				if (it == map_.end()) {
@@ -87,7 +95,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">探索するキー</param>
 			/// <returns>取得した値... ないなら [ nullptr ]</returns>
-			[[nodiscard]] Value* get_value_p(const Key& key) noexcept {
+			[[nodiscard]] Value* get_value_p(
+				const Key& key
+			) noexcept {
 
 				const auto it = map_.find(key);
 				if (it == map_.end()) {
@@ -97,7 +107,9 @@ namespace HandyItem {
 				return &it->second;
 			}
 
-			[[nodiscard]] const Value* get_value_p(const Key& key) const noexcept {
+			[[nodiscard]] const Value* get_value_p(
+				const Key& key
+			) const noexcept {
 
 				const auto it = map_.find(key);
 				if (it == map_.end()) {

@@ -3,86 +3,105 @@
 #include<bitset>
 
 /// <summary>
-/// ビット名前空間
+/// 便利アイテム名前空間
 /// </summary>
-namespace bit {
-
-	/* ========== ビットフラグクラス定義 ========== */
+namespace HandyItem {
 
 	/// <summary>
-	/// ビットフラグクラス
+	/// ビット名前空間
 	/// </summary>
-	/// <typeparam name="T">Bitフラグに使う列挙体の型</typeparam>
-	template<Enum::concepts::EnumHasCount T>
-	class BitFlag 
-	{
-	public:
-		/* ===== メンバー関数 ===== */
+	namespace bit {
+
+		/* ========== ビットフラグクラス定義 ========== */
 
 		/// <summary>
-		/// コンストラクタ
+		/// ビットフラグクラス
 		/// </summary>
-		BitFlag() = default;
+		/// <typeparam name="T">Bitフラグに使う列挙体の型</typeparam>
+		template<Enum::concepts::EnumHasCount T>
+		class BitFlag
+		{
+		public:
+			/* ===== メンバー関数 ===== */
 
-		/// <summary>
-		/// デストラクタ
-		/// </summary>
-		~BitFlag() = default;
-		
-		/// <summary>
-		/// ビットセット関数
-		/// </summary>
-		/// <param name="value">対応するenum</param>
-		void set(T value) {
-			bit_.set(others::enum_to_index(value));
-		}
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			BitFlag() = default;
 
-		/// <summary>
-		/// ビットリセット関数
-		/// </summary>
-		/// <param name="value">対応するenum</param>
-		void reset(T value) {
-			bit_.reset(others::enum_to_index(value));
-		}
+			/// <summary>
+			/// デストラクタ
+			/// </summary>
+			~BitFlag() = default;
 
-		/// <summary>
-		/// ビットクリア関数
-		/// </summary>
-		void clear() {
-			bit_.reset();
-		}
+			/// <summary>
+			/// ビットセット関数
+			/// </summary>
+			/// <param name="value">対応するenum</param>
+			void set(
+				T value
+			) {
+				
+				bit_.set(others::enum_to_index(value));
+			}
 
-		/// <summary>
-		/// ビットテスト関数
-		/// </summary>
-		/// <param name="value">対応するenum</param>
-		/// <returns>テスト結果</returns>
-		[[nodiscard]] bool test(T value) const {
-			return bit_.test(others::enum_to_index(value));
-		}
+			/// <summary>
+			/// ビットリセット関数
+			/// </summary>
+			/// <param name="value">対応するenum</param>
+			void reset(
+				T value
+			) {
 
-		/// <summary>
-		/// [ true ] ビット存在判定関数
-		/// </summary>
-		/// <returns> 一つでもビットが立っていたら [ true ] </returns>
-		[[nodiscard]] bool any() const {
-			return bit_.any();
-		}
+				bit_.reset(others::enum_to_index(value));
+			}
 
-		/// <summary>
-		/// 全ビット [ false ] 判定関数
-		/// </summary>
-		/// <returns> すべてのビットが立っていないなら [ true ] </returns>
-		[[nodisacrd]] bool none() const {
-			return bit_.none();
-		}
+			/// <summary>
+			/// ビットクリア関数
+			/// </summary>
+			void clear() {
 
-	private:
-		/* ===== メンバー変数 ===== */
+				bit_.reset();
+			}
 
-		/// <summary>
-		/// ビットフラグ
-		/// </summary>
-		std::bitset<others::enum_to_index(T::Count)> bit_;
-	};
+			/// <summary>
+			/// ビットテスト関数
+			/// </summary>
+			/// <param name="value">対応するenum</param>
+			/// <returns>テスト結果</returns>
+			[[nodiscard]] bool test(
+				T value
+			) const {
+
+				return bit_.test(others::enum_to_index(value));
+			}
+
+			/// <summary>
+			/// [ true ] ビット存在判定関数
+			/// </summary>
+			/// <returns> 一つでもビットが立っていたら [ true ] </returns>
+			[[nodiscard]] bool any() const {
+
+				return bit_.any();
+			}
+
+			/// <summary>
+			/// 全ビット [ false ] 判定関数
+			/// </summary>
+			/// <returns> すべてのビットが立っていないなら [ true ] </returns>
+			[[nodisacrd]] bool none() const {
+
+				return bit_.none();
+			}
+
+		private:
+			/* ===== メンバー変数 ===== */
+
+			/// <summary>
+			/// ビットフラグ
+			/// </summary>
+			std::bitset<others::enum_to_index(T::Count)> bit_;
+
+		};
+	}
 }

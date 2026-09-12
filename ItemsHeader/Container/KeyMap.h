@@ -33,8 +33,11 @@ namespace HandyItem {
 				/// 引数付きコンストラクタ
 				/// </summary>
 				/// <param name="key">キーに入れる値</param>
-				LogicalKey(std::uint32_t key) :
+				LogicalKey(
+					std::uint32_t key
+				) :
 					DefaultKey(key) {}
+
 			};
 
 			/// <summary>
@@ -51,8 +54,11 @@ namespace HandyItem {
 				/// 引数付きコンストラクタ
 				/// </summary>
 				/// <param name="key">キーに入れる値</param>
-				EncodedKey(std::uint32_t key) :
+				EncodedKey(
+					std::uint32_t key
+				) :
 					DefaultKey(key) {}
+
 			};
 
 
@@ -66,8 +72,19 @@ namespace HandyItem {
 			template<typename T, typename Key>
 				requires std::derived_from<Key, EncodedKey>
 			struct HandleBase {
+
+				/* ========== メンバー変数 ========== */
+
+				/// <summary>
+				/// ハンドル本体
+				/// </summary>
 				T handle_{};
+
+				/// <summary>
+				/// ハンドル識別キー
+				/// </summary>
 				Key handle_key{};
+
 			};
 
 			/// <summary>
@@ -78,8 +95,19 @@ namespace HandyItem {
 			template<typename T, typename Key>
 				requires std::derived_from<Key, EncodedKey>
 			struct HandlePtrBase {
+
+				/* ========== メンバー変数 ========== */
+
+				/// <summary>
+				/// ハンドル本体
+				/// </summary>
 				T* handle_p{};
+
+				/// <summary>
+				/// ハンドル識別キー
+				/// </summary>
 				Key handle_key{};
+
 			};
 
 		}
@@ -131,7 +159,10 @@ namespace HandyItem {
 			/// <param name="key">登録するキー</param>
 			/// <param name="value">追加する値</param>
 			/// <returns>追加の成否</returns>
-			[[nodiscard]] bool add_value(const LogicalKeyT& key, Value&& value) {
+			[[nodiscard]] bool add_value(
+				const LogicalKeyT& key, 
+				Value&& value
+			) {
 
 				return map_.add_value(encode_key(key).key_value, std::move(value));
 			}
@@ -146,12 +177,16 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="encode_key">エンコードされたキー</param>
 			/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
-			[[nodiscard]] std::optional<Value> get_value(const EncodedKeyT& encodekey) noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const EncodedKeyT& encodekey
+			) noexcept {
 
 				return map_.get_value(encodekey.key_value);
 			}
 
-			[[nodiscard]] std::optional<Value> get_value(const EncodedKeyT& encodekey) const noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const EncodedKeyT& encodekey
+			) const noexcept {
 
 				return map_.get_value(encodekey.key_value);
 			}
@@ -161,12 +196,16 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">エンコードするキー</param>
 			/// <returns>取得した値... ないなら [ std::nullopt ]</returns>
-			[[nodiscard]] std::optional<Value> get_value(const LogicalKeyT& key) noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const LogicalKeyT& key
+			) noexcept {
 
 				return map_.get_value(encode_key(key).key_value);
 			}
 
-			[[nodiscard]] std::optional<Value> get_value(const LogicalKeyT& key) const noexcept {
+			[[nodiscard]] std::optional<Value> get_value(
+				const LogicalKeyT& key
+			) const noexcept {
 
 				return map_.get_value(encode_key(key).key_value);
 			}
@@ -179,12 +218,16 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">探索するキー</param>
 			/// <returns>取得した値... ないなら [ nullptr ]</returns>
-			[[nodiscard]] Value* get_value_p(const EncodedKeyT& encodekey) noexcept {
+			[[nodiscard]] Value* get_value_p(
+				const EncodedKeyT& encodekey
+			) noexcept {
 
 				return map_.get_value_p(encodekey.key_value);
 			}
 
-			[[nodiscard]] const Value* get_value_p(const EncodedKeyT& encodekey) const noexcept {
+			[[nodiscard]] const Value* get_value_p(
+				const EncodedKeyT& encodekey
+			) const noexcept {
 
 				return map_.get_value_p(encodekey.key_value);
 			}
@@ -194,12 +237,16 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">探索するキー</param>
 			/// <returns>取得した値... ないなら [ nullptr ]</returns>
-			[[nodiscard]] Value* get_value_p(const EncodedKeyT& encodekey) noexcept {
+			[[nodiscard]] Value* get_value_p(
+				const EncodedKeyT& encodekey
+			) noexcept {
 
 				return map_.get_value_p(encodekey.key_value);
 			}
 
-			[[nodiscard]] const Value* get_value_p(const EncodedKeyT& encodekey) const noexcept {
+			[[nodiscard]] const Value* get_value_p(
+				const EncodedKeyT& encodekey
+			) const noexcept {
 
 				return map_.get_value_p(encodekey.key_value);
 			}
@@ -212,7 +259,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="key">エンコードしたいキー</param>
 			/// <returns>エンコードされたキー</returns>
-			[[nodiscard]] EncodedKeyT encode_key(const LogicalKeyT& key) const noexcept {
+			[[nodiscard]] EncodedKeyT encode_key(
+				const LogicalKeyT& key
+			) const noexcept {
 
 				return converter_.encode_key(encode_key(key).key_value);
 			}
@@ -222,7 +271,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="encode_key">デコードしたいキー</param>
 			/// <returns>デコードされたキー</returns>
-			[[nodiscard]] LogicalKeyT decode_key(const EncodedKeyT& encodekey)const noexcept {
+			[[nodiscard]] LogicalKeyT decode_key(
+				const EncodedKeyT& encodekey
+			) const noexcept {
 
 				return converter_.decode_key(encodekey);
 			}

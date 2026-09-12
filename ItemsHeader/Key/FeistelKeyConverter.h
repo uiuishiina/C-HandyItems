@@ -41,7 +41,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="value">エンコードしたいキー</param>
 			/// <returns>エンコードされたキー</returns>
-			[[nodiscard]] U encode_key(const T& value) const override {
+			[[nodiscard]] U encode_key(
+				const T& value
+			) const override {
 
 				U result{};
 
@@ -55,7 +57,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="value">デコードしたいキー</param>
 			/// <returns>デコードされたキー</returns>
-			[[nodiscard]] T decode_key(const U& value) const override {
+			[[nodiscard]] T decode_key(
+				const U& value
+			) const override {
 
 				T result{};
 
@@ -88,8 +92,10 @@ namespace HandyItem {
 			/// <param name="value">右半分</param>
 			/// <param name="round_key">ラウンドキー</param>
 			/// <returns>ラウンド結果</returns>
-			static constexpr [[nodiscard]] std::uint16_t round_func(
-				const std::uint16_t value, const std::uint32_t round_key) noexcept {
+			[[nodiscard]] constexpr std::uint16_t round_func(
+				const std::uint16_t value, 
+				const std::uint32_t round_key
+			) noexcept {
 
 				std::uint32_t x = value;
 
@@ -107,8 +113,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="round">ラウンド番号</param>
 			/// <returns>ラウンドキー</returns>
-			constexpr [[nodiscard]] std::uint32_t make_round_key(
-				const std::uint32_t round) const noexcept {
+			[[nodiscard]] constexpr std::uint32_t make_round_key(
+				const std::uint32_t round
+			) const noexcept {
 
 				std::uint32_t key = this->conversion_constant;
 
@@ -126,8 +133,9 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="value">暗号化する値</param>
 			/// <returns>暗号化した値</returns>
-			constexpr [[nodiscard]] std::uint32_t encrypt(
-				const std::uint32_t value) const noexcept {
+			[[nodiscard]] constexpr std::uint32_t encrypt(
+				const std::uint32_t value
+			) const noexcept {
 
 				Block block{
 					static_cast<std::uint16_t>(value >> 16),	// 左
@@ -135,15 +143,14 @@ namespace HandyItem {
 				};
 
 				for (std::uint32_t round = 0; round < ROUND_COUNT; ++round) {
-					const std::uint16_t old_left = block.left;
 
+					const std::uint16_t old_left = block.left;
 					block.left = block.right;
 
-					block.right =
-						static_cast<std::uint16_t>(
-							old_left ^
-							round_func(block.right, make_round_key(round))
-							);
+					block.right = static_cast<std::uint16_t>(
+						old_left ^
+						round_func(block.right, make_round_key(round))
+						);
 				}
 
 				/*
@@ -156,15 +163,19 @@ namespace HandyItem {
 					Rn | Ln
 					として返す。
 				*/
-				return (static_cast<std::uint32_t>(block.right) << 16) | static_cast<std::uint32_t>(block.left);
+				return (
+					static_cast<std::uint32_t>(block.right) << 16) | 
+					static_cast<std::uint32_t>(block.left
+						);
 			}
 
 
 			/// <summary>
 			/// 32bit値をFeistel方式で復号する
 			/// </summary>
-			constexpr [[nodiscard]] std::uint32_t decrypt(
-				const std::uint32_t value) const noexcept {
+			[[nodiscard]] constexpr std::uint32_t decrypt(
+				const std::uint32_t value
+			) const noexcept {
 
 				Block block{
 					static_cast<std::uint16_t>(value >> 16),
@@ -172,6 +183,7 @@ namespace HandyItem {
 				};
 
 				for (std::uint32_t round = ROUND_COUNT; round > 0; --round) {
+
 					const std::uint16_t new_left = block.right;
 					const std::uint16_t new_right =
 						static_cast<std::uint16_t>(
@@ -183,8 +195,12 @@ namespace HandyItem {
 					block.right = new_right;
 				}
 
-				return (static_cast<std::uint32_t>(block.right) << 16) | static_cast<std::uint32_t>(block.left);
+				return (
+					static_cast<std::uint32_t>(block.right) << 16) | 
+					static_cast<std::uint32_t>(block.left
+						);
 			}
+
 		};
 	}
 }

@@ -158,11 +158,14 @@
     <ClInclude Include="ItemsHeader\Math\BaseStruct\Float3.h" />
     <ClInclude Include="ItemsHeader\Math\BaseStruct\Float4.h" />
     <ClInclude Include="ItemsHeader\Math\BaseStruct\Matrix.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Quaternion.h" />
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Transform.h" />
     <ClInclude Include="ItemsHeader\Math\Function\MathF.h" />
     <ClInclude Include="ItemsHeader\Math\Function\MathFFloat2.h" />
     <ClInclude Include="ItemsHeader\Math\Function\MathFFloat3.h" />
     <ClInclude Include="ItemsHeader\Math\Function\MathFFloat4.h" />
     <ClInclude Include="ItemsHeader\Math\Function\MathFMatrix.h" />
+    <ClInclude Include="ItemsHeader\Math\Function\MathFQuaternion.h" />
     <ClInclude Include="ItemsHeader\Math\Matrix\DirectXMatrix.h" />
     <ClInclude Include="ItemsHeader\Math\Matrix\MatrixBase.h" />
     <ClInclude Include="ItemsHeader\Others\CircularIndex.h" />

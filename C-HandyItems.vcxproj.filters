@@ -141,6 +141,15 @@
     <ClInclude Include="ItemsHeader\Math\Function\MathFFloat3.h">
       <Filter>ヘッダー ファイル\Math\Function</Filter>
     </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Transform.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\BaseStruct\Quaternion.h">
+      <Filter>ヘッダー ファイル\Math\BaseStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsHeader\Math\Function\MathFQuaternion.h">
+      <Filter>ヘッダー ファイル\Math\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry\Entry.cpp">
