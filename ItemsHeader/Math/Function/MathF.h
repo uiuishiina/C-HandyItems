@@ -16,7 +16,7 @@ namespace HandyItem {
 		/// </summary>
 		namespace MathF {
 
-			/* ========== 基礎数学 ========== */
+			/* ========== 定数定義 ========== */
 
 			/// <summary>
 			/// ０定数
@@ -38,12 +38,15 @@ namespace HandyItem {
 			/// <summary>
 			/// 二倍円周率
 			/// </summary>
-			inline constexpr float TWO_PI = PI * 2.0f;
+			inline constexpr float Double_PI = PI * 2.0f;
 
 			/// <summary>
 			/// 1/2円周率
 			/// </summary>
 			inline constexpr float HALF_PI = PI * HALF;
+
+
+			/* ========== 基礎数学 ========== */
 
 			/* -- 三角関数 -- */
 
@@ -82,6 +85,7 @@ namespace HandyItem {
 
 				return std::tan(value);
 			}
+
 
 			/* -- 逆三角関数 -- */
 
@@ -135,6 +139,62 @@ namespace HandyItem {
 				return std::atan2(y, x);
 			}
 
+
+			/* -- 数値制限 -- */
+
+			/// <summary>
+			/// 最小値取得関数
+			/// </summary>
+			/// <param name="left">比較する左辺値</param>
+			/// <param name="right">比較する右辺値</param>
+			/// <returns>[ 小さい方 ] の値</returns>
+			[[nodiscard]] inline float min(
+				float left,
+				float right
+			) {
+
+				return left < right ? left : right;
+			}
+
+			/// <summary>
+			/// 最大値取得関数
+			/// </summary>
+			/// <param name="left">比較する左辺値</param>
+			/// <param name="right">比較する右辺値</param>
+			/// <returns>[ 大きい方 ] の値</returns>
+			[[nodiscard]] inline float max(
+				float left, 
+				float right
+			) {
+
+				return left > right ? left : right;
+			}
+
+			/// <summary>
+			/// Clamp関数
+			/// </summary>
+			/// <param name="value">制限する値</param>
+			/// <param name="min">最小値... デフォルト[ 0 ]</param>
+			/// <param name="max">最大値... デフォルト[ 1 ]</param>
+			/// <returns>[ 範囲内に制限 ] された値</returns>
+			[[nodiscard]] inline float clamp(
+				float value,
+				float min = 0.0f,
+				float max = 1.0f
+			) {
+
+				if (min <= value && value <= max) {
+					return value;
+				}
+				else if (value < min) {
+					return min;
+				}
+				else {
+					return max;
+				}
+			}
+
+
 			/* -- 数値計算 -- */
 
 			/// <summary>
@@ -162,97 +222,37 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-			/// 最小値取得関数
+			/// 角度正規化関数
 			/// </summary>
-			/// <param name="left">比較する左辺値</param>
-			/// <param name="right">比較する右辺値</param>
-			/// <returns>[ 小さい方 ] の値</returns>
-			[[nodiscard]] inline float min(
-				float left,
-				float right
-			) {
-
-				return left < right ? left : right;
-			}
-
-			/* -- 数値制限 -- */
-
-			/// <summary>
-			/// 最大値取得関数
-			/// </summary>
-			/// <param name="left">比較する左辺値</param>
-			/// <param name="right">比較する右辺値</param>
-			/// <returns>[ 大きい方 ] の値</returns>
-			[[nodiscard]] inline float max(
-				float left, 
-				float right
-			) {
-
-				return left > right ? left : right;
-			}
-
-			/// <summary>
-			/// Clamp関数
-			/// </summary>
-			/// <param name="value">制限する値</param>
-			/// <param name="min">最小値</param>
-			/// <param name="max">最大値</param>
-			/// <returns>[ 範囲内に制限 ] された値</returns>
-			[[nodiscard]] inline float clamp(
-				float value,
-				float min,
-				float max
-			) {
-
-				if (min <= value && value <= max) {
-					return value;
-				}
-				else if (value < min) {
-					return min;
-				}
-				else {
-					return max;
-				}
-			}
-
-			/// <summary>
-/// 0～1の範囲に制限する関数
-/// </summary>
-/// <param name="value">制限する値</param>
-/// <returns>0～1に制限された値</returns>
-			[[nodiscard]] inline float clamp01(
-				float value
-			) {
-
-				return clamp(value, 0.0f, 1.0f);
-			}
-
-			/// <summary>
-/// 角度を -PI ～ PI の範囲へ正規化する関数
-/// </summary>
-/// <param name="angle">角度（ラジアン）</param>
-/// <returns>正規化された角度（ラジアン）</returns>
+			/// <details>
+			/// 角度を -PI ～ PI の範囲へ正規化する関数
+			/// </details>
+			/// <param name="angle">角度（ラジアン）</param>
+			/// <returns>正規化された角度（ラジアン）</returns>
 			[[nodiscard]] inline float wrap_angle(
 				float angle
 			) {
 
 				angle = std::fmod(
 					angle + PI,
-					TWO_PI
+					Double_PI
 				);
 
 				if (angle < 0.0f) {
-					angle += TWO_PI;
+					angle += Double_PI;
 				}
 
 				return angle - PI;
 			}
 
 			/// <summary>
-/// 度からラジアンへ変換する関数
-/// </summary>
-/// <param name="degrees">角度（度）</param>
-/// <returns>角度（ラジアン）</returns>
+			/// 度数変換関数
+			/// </summary>
+			/// <details>
+			/// 度数からラジアンへ変換する関数
+			/// </details>
+			/// <param name="degrees">角度（度）</param>
+			/// <returns>角度（ラジアン）</returns>
 			[[nodiscard]] inline float deg_to_rad(
 				float degrees
 			) {
@@ -261,10 +261,13 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-/// ラジアンから度へ変換する関数
-/// </summary>
-/// <param name="radians">角度（ラジアン）</param>
-/// <returns>角度（度）</returns>
+			/// ラジアン変換関数
+			/// </summary>
+			/// <details>
+			/// ラジアンから度へ変換する関数
+			/// </details>
+			/// <param name="radians">角度（ラジアン）</param>
+			/// <returns>角度（度）</returns>
 			[[nodiscard]] inline float rad_to_deg(
 				float radians
 			) {
@@ -273,12 +276,15 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-/// 浮動小数点値がほぼ等しいか判定する関数
-/// </summary>
-/// <param name="left">左辺値</param>
-/// <param name="right">右辺値</param>
-/// <param name="epsilon">許容誤差</param>
-/// <returns>ほぼ等しい場合は true</returns>
+			/// 浮動小数点等値判定関数
+			/// </summary>
+			/// <details>
+			/// 浮動小数点値がほぼ等しいか判定する関数
+			/// </details>
+			/// <param name="left">左辺値</param>
+			/// <param name="right">右辺値</param>
+			/// <param name="epsilon">許容誤差</param>
+			/// <returns>ほぼ等しい場合は [ true ]</returns>
 			[[nodiscard]] inline bool approximately(
 				float left,
 				float right,
@@ -289,32 +295,35 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-/// 符号を取得する関数
-/// </summary>
-/// <param name="value">対象値</param>
-/// <returns>正なら1、負なら-1、0なら0</returns>
+			/// 符号取得関数
+			/// </summary>
+			/// <param name="value">対象値</param>
+			/// <returns>正なら [ 1 ]、負なら [ -1 ]、0なら [ 0 ]</returns>
 			[[nodiscard]] inline float sign(
 				float value
 			) {
 
-				if (value > 0.0f) {
+				if (value > ZEROF) {
 					return 1.0f;
 				}
-
-				if (value < 0.0f) {
+				else if (value < ZEROF) {
 					return -1.0f;
 				}
-
-				return 0.0f;
+				else {
+					return ZEROF;
+				}
 			}
 
 			/// <summary>
-/// 線形補間を行う関数
-/// </summary>
-/// <param name="start">開始値</param>
-/// <param name="end">終了値</param>
-/// <param name="t">補間係数</param>
-/// <returns>補間結果</returns>
+			/// 線形補間行関数
+			/// </summary>
+			/// <details>
+			/// 線形補間を行う関数
+			/// </details>
+			/// <param name="start">開始値</param>
+			/// <param name="end">終了値</param>
+			/// <param name="t">補間係数</param>
+			/// <returns>補間結果</returns>
 			[[nodiscard]] inline float lerp(
 				float start,
 				float end,

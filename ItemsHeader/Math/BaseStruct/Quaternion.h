@@ -82,9 +82,9 @@ namespace HandyItem {
 				w_{ value.w_ } {}
 
 
-			/* -- 演算子オーバーロード -- */
+			/* ========== 演算子オーバーロード ========== */
 
-			/* -- アクセス -- */
+			/* ===== アクセス ===== */
 
 			/// <summary>
 			/// 要素アクセス演算子
@@ -133,6 +133,9 @@ namespace HandyItem {
 				}
 			}
 
+
+			/* ===== 演算子 ===== */
+
 			/* -- 加算 -- */
 
 			/// <summary>
@@ -169,6 +172,7 @@ namespace HandyItem {
 				return *this;
 			}
 
+
 			/* -- 減算 -- */
 
 			/// <summary>
@@ -204,6 +208,7 @@ namespace HandyItem {
 
 				return *this;
 			}
+
 
 			/* -- 乗算 -- */
 
@@ -249,8 +254,10 @@ namespace HandyItem {
 				) {
 
 				*this = *this * right;
+
 				return *this;
 			}
+
 
 			/// <summary>
 			/// スカラー倍乗算演算子
@@ -278,13 +285,11 @@ namespace HandyItem {
 				float right
 				) {
 
-				x_ *= right;
-				y_ *= right;
-				z_ *= right;
-				w_ *= right;
+				*this = *this * right;
 
 				return *this;
 			}
+
 
 			/* -- 除算 -- */
 
@@ -315,13 +320,11 @@ namespace HandyItem {
 				float right
 				) {
 
-				x_ /= right;
-				y_ /= right;
-				z_ /= right;
-				w_ /= right;
+				*this = *this / right;
 
 				return *this;
 			}
+
 
 			/* -- 比較 -- */
 
@@ -355,10 +358,12 @@ namespace HandyItem {
 			}
 
 
+			/* -- その他 -- */
+
 			/// <summary>
-/// 符号反転演算子
-/// </summary>
-/// <returns>符号反転したクォータニオン</returns>
+			/// 符号反転演算子
+			/// </summary>
+			/// <returns>符号反転したクォータニオン</returns>
 			[[nodiscard]] Quaternion operator - () const {
 
 				return {
@@ -369,8 +374,9 @@ namespace HandyItem {
 				};
 			}
 
-			/* -- 数学系関数 -- */
 
+			/* ===== 数学系関数 ===== */
+			
 			/// <summary>
 			/// 共役クォータニオン取得関数
 			/// </summary>
@@ -439,11 +445,10 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-			/// 逆クォータニオンを取得関数
+			/// 逆クォータニオン取得関数
 			/// </summary>
-			/// <returns></returns>
-			[[nodiscard]]
-			Quaternion inverse() const {
+			/// <returns>逆クォータニオン</returns>
+			[[nodiscard]] Quaternion inverse() const {
 
 				const auto length_squared = this->length_squared();
 
@@ -453,7 +458,6 @@ namespace HandyItem {
 
 				return conjugate() / length_squared;
 			}
-
 
 		};
 	}
