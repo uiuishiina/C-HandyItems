@@ -22,20 +22,40 @@ namespace HandyItem {
 
 			/* ========== 行列数学 ========== */
 
+			/* ===== 作成関数 ===== */
+
 			/// <summary>
-			/// 単位行列取得関数
+			/// 単位行列作成関数
 			/// </summary>
 			/// <returns>単位行列</returns>
-			[[nodiscard]] inline Matrix identity() {
+			[[nodiscard]] inline Matrix matrix_identity() {
 				return {};
 			}
 
 			/// <summary>
-			/// クォータニオンから回転行列を作成する関数
+			/// 平行移動行列作成関数
+			/// </summary>
+			/// <param name="translation">平行移動量</param>
+			/// <returns>平行移動行列</returns>
+			[[nodiscard]] inline Matrix translation_to_matrix(
+				const Float3& translation
+			) {
+
+				Matrix result{};
+
+				result[0][3] = translation.x_;
+				result[1][3] = translation.y_;
+				result[2][3] = translation.z_;
+
+				return result;
+			}
+
+			/// <summary>
+			/// 回転行列作成関数
 			/// </summary>
 			/// <param name="quaternion">対象クォータニオン</param>
 			/// <returns>回転行列</returns>
-			[[nodiscard]] inline Matrix to_matrix(
+			[[nodiscard]] inline Matrix quaternion_to_matrix(
 				const Quaternion& quaternion
 			) {
 
@@ -63,21 +83,18 @@ namespace HandyItem {
 						2.0f * (xz + wy),
 						0.0f
 					},
-
 					Float4{
 						2.0f * (xy + wz),
 						1.0f - 2.0f * (xx + zz),
 						2.0f * (yz - wx),
 						0.0f
 					},
-
 					Float4{
 						2.0f * (xz - wy),
 						2.0f * (yz + wx),
 						1.0f - 2.0f * (xx + yy),
 						0.0f
 					},
-
 					Float4{
 						0.0f,
 						0.0f,
@@ -88,201 +105,7 @@ namespace HandyItem {
 			}
 
 			/// <summary>
-			/// 転置行列計算関数
-			/// </summary>
-			/// <param name="matrix">対象行列</param>
-			/// <returns>転置された行列</returns>
-			[[nodiscard]] inline Matrix transpose(
-				const Matrix& matrix
-			) {
-
-				Matrix result{};
-
-				for (std::size_t row = 0; row < 4; ++row) {
-					for (std::size_t col = 0; col < 4; ++col) {
-						result[row][col] = matrix[col][row];
-					}
-				}
-
-				return result;
-			}
-
-
-			/// <summary>
-			/// 行列式計算関数
-			/// </summary>
-			/// <param name="matrix">対象行列</param>
-			/// <returns>行列式</returns>
-			[[nodiscard]] inline float determinant(
-				const Matrix& matrix
-			) {
-
-				/*
-					a,b,c,d
-					e,f,g,h
-					i,j,k,l
-					m,n,o,p
-				*/
-
-				const float a = matrix[0][0];
-				const float b = matrix[0][1];
-				const float c = matrix[0][2];
-				const float d = matrix[0][3];
-
-				const float e = matrix[1][0];
-				const float f = matrix[1][1];
-				const float g = matrix[1][2];
-				const float h = matrix[1][3];
-
-				const float i = matrix[2][0];
-				const float j = matrix[2][1];
-				const float k = matrix[2][2];
-				const float l = matrix[2][3];
-
-				const float m = matrix[3][0];
-				const float n = matrix[3][1];
-				const float o = matrix[3][2];
-				const float p = matrix[3][3];
-
-				return 
-					a * (
-						f * (k * p - l * o) -
-						g * (j * p - l * n) +
-						h * (j * o - k * n)
-					)
-					- b * (
-						e * (k * p - l * o) -
-						g * (i * p - l * m) +
-						h * (i * o - k * m)
-						)
-					+ c * (
-						e * (j * p - l * n) -
-						f * (i * p - l * m) +
-						h * (i * n - j * m)
-						)
-					- d * (
-						e * (j * o - k * n) -
-						f * (i * o - k * m) +
-						g * (i * n - j * m)
-						);
-			}
-
-
-			/// <summary>
-			/// 逆行列計算関数
-			/// </summary>
-			/// <param name="matrix">対象行列</param>
-			/// <returns>逆行列...ないなら [ std::nullopt ]</returns>
-			[[nodiscard]] inline std::optional<Matrix> inverse(
-				const Matrix& matrix
-			) {
-
-				const float det = determinant(matrix);
-
-				//	逆行列を持たないなら [ std::nullopt ]
-				constexpr float epsilon = 1.0e-6f;
-
-				if (MathF::abs(det) < epsilon) {
-					return std::nullopt;
-				}
-
-				Matrix result{};
-
-				//	余因子行列を作成
-				for (std::size_t row = 0; row < 4; ++row) {
-					for (std::size_t col = 0; col < 4; ++col) {
-
-						float minor[3][3]{};
-
-						std::size_t minor_row = 0;
-
-						for (std::size_t src_row = 0; src_row < 4; ++src_row) {
-
-							if (src_row == row) {
-								continue;
-							}
-
-							std::size_t minor_col = 0;
-
-							for (std::size_t src_col = 0; src_col < 4; ++src_col) {
-
-								if (src_col == col) {
-									continue;
-								}
-
-								minor[minor_row][minor_col] =
-									matrix[src_row][src_col];
-
-								++minor_col;
-							}
-
-							++minor_row;
-						}
-
-						const float minor_det =
-							minor[0][0] * (
-								minor[1][1] * minor[2][2] -
-								minor[1][2] * minor[2][1]
-								)
-							- minor[0][1] * (
-								minor[1][0] * minor[2][2] -
-								minor[1][2] * minor[2][0]
-								)
-							+ minor[0][2] * (
-								minor[1][0] * minor[2][1] -
-								minor[1][1] * minor[2][0]
-								);
-
-						const float cofactor = (
-							(row + col) % 2 == 0
-							) ?
-							minor_det : -minor_det;
-
-						//	余因子行列の転置 = 逆行列
-						result[col][row] = cofactor / det;
-					}
-				}
-
-				return result;
-			}
-
-
-			/* ========== 変換行列 ========== */
-
-			/// <summary>
-			/// 平行移動行列生成関数
-			/// </summary>
-			/// <param name="translation">平行移動量</param>
-			/// <returns>平行移動行列</returns>
-			[[nodiscard]] inline Matrix translate(
-				const Float3& translation
-			) {
-
-				Matrix result{};
-
-				result[0][3] = translation.x_;
-				result[1][3] = translation.y_;
-				result[2][3] = translation.z_;
-
-				return result;
-			}
-
-
-			/// <summary>
-			/// 拡大縮小行列生成関数
-			/// </summary>
-			/// <param name="scale">XYZの拡大縮小率</param>
-			/// <returns>拡大縮小行列</returns>
-			[[nodiscard]] inline Matrix scale(
-				const Float3& scale
-			) {
-
-				return Matrix{ scale };
-			}
-
-
-			/// <summary>
-			/// X軸回転行列生成関数
+			/// X軸回転行列作成関数
 			/// </summary>
 			/// <param name="radian">回転角度（ラジアン）</param>
 			/// <returns>X軸回転行列</returns>
@@ -301,9 +124,8 @@ namespace HandyItem {
 				};
 			}
 
-
 			/// <summary>
-			/// Y軸回転行列生成関数
+			/// Y軸回転行列作成関数
 			/// </summary>
 			/// <param name="radian">回転角度（ラジアン）</param>
 			/// <returns>Y軸回転行列</returns>
@@ -322,9 +144,8 @@ namespace HandyItem {
 				};
 			}
 
-
 			/// <summary>
-			/// Z軸回転行列生成関数
+			/// Z軸回転行列作成関数
 			/// </summary>
 			/// <param name="radian">回転角度（ラジアン）</param>
 			/// <returns>Z軸回転行列</returns>
@@ -341,6 +162,220 @@ namespace HandyItem {
 					Float4{ 0.0f, 0.0f, 1.0f, 0.0f },
 					Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
 				};
+			}
+
+			/// <summary>
+			/// 拡大率行列作成関数
+			/// </summary>
+			/// <param name="scale">XYZの拡大率</param>
+			/// <returns>拡大率行列</returns>
+			[[nodiscard]] inline Matrix scale_to_matrix(
+				const Float3& scale
+			) {
+
+				return Matrix{ scale };
+			}
+
+			/// <summary>
+			/// トランスフォーム行列作成関数
+			/// </summary>
+			/// <details>
+			/// 拡大率・回転・平行移動を利用して作成
+			/// </details>
+			/// <param name="translation">平行移動量</param>
+			/// <param name="rotation">回転クォータニオン</param>
+			/// <param name="scale">拡大率</param>
+			/// <returns>変換行列</returns>
+			[[nodiscard]] inline Matrix transform_to_matrix(
+				const Float3& translation,
+				const Quaternion& rotation,
+				const Float3& scale
+			) {
+
+				return (
+					MathF::translation_to_matrix(translation) *
+					MathF::quaternion_to_matrix(rotation) *
+					MathF::scale_to_matrix(scale)
+					);
+			}
+
+
+			/* ===== 変換関数 ===== */
+			
+			/// <summary>
+			/// 平行移動ベクトル取得関数
+			/// </summary>
+			/// <param name="translation">取得する行列</param>
+			/// <returns>取得した平行移動ベクトル</returns>
+			[[nodiscard]] inline Float3 translation_from_matrix(
+				const Matrix& matrix
+			) {
+
+				return {
+					matrix[0][3],
+					matrix[1][3],
+					matrix[2][3]
+				};
+			}
+
+			/// <summary>
+			/// クォータニオン取得関数
+			/// </summary>
+			/// <param name="matrix">取得する行列</param>
+			/// <returns>作成したクォータニオン</returns>
+			[[nodiscard]] inline Quaternion quaternion_from_matrix(
+				const Matrix& matrix
+			) {
+
+				const auto m00 = matrix[0][0];
+				const auto m11 = matrix[1][1];
+				const auto m22 = matrix[2][2];
+				const auto trace = m00 + m11 + m22;
+
+				Quaternion result{};
+
+				if (trace > 0.0f) {
+
+					const auto s = MathF::sqrt(trace + 1.0f) * 2.0f;
+
+					result.w_ = 0.25f * s;
+					result.x_ = (matrix[2][1] - matrix[1][2]) / s;
+					result.y_ = (matrix[0][2] - matrix[2][0]) / s;
+					result.z_ = (matrix[1][0] - matrix[0][1]) / s;
+				}
+				else if (
+					m00 > m11 &&
+					m00 > m22
+					) {
+
+					const auto s = MathF::sqrt(
+						1.0f + m00 - m11 - m22
+					) * 2.0f;
+
+					result.w_ = (matrix[2][1] - matrix[1][2]) / s;
+					result.x_ = 0.25f * s;
+					result.y_ = (matrix[0][1] + matrix[1][0]) / s;
+					result.z_ = (matrix[0][2] + matrix[2][0]) / s;
+				}
+				else if (m11 > m22) {
+
+					const auto s = MathF::sqrt(
+						1.0f + m11 - m00 - m22
+					) * 2.0f;
+
+					result.w_ = (matrix[0][2] - matrix[2][0]) / s;
+					result.x_ = (matrix[0][1] + matrix[1][0]) / s;
+					result.y_ = 0.25f * s;
+					result.z_ = (matrix[1][2] + matrix[2][1]) / s;
+				}
+				else {
+
+					const auto s = MathF::sqrt(
+						1.0f + m22 - m00 - m11
+					) * 2.0f;
+
+					result.w_ = (matrix[1][0] - matrix[0][1]) / s;
+					result.x_ = (matrix[0][2] + matrix[2][0]) / s;
+					result.y_ = (matrix[1][2] + matrix[2][1]) / s;
+					result.z_ = 0.25f * s;
+				}
+
+				return result.normalized();
+			}
+
+			/// <summary>
+			/// 拡大率取得関数
+			/// </summary>
+			/// <param name="matrix">取得する行列</param>
+			/// <returns>取得した拡大率</returns>
+			[[nodiscard]] inline Float3 scale_from_matrix(
+				const Matrix& matrix
+			) {
+
+				return {
+					MathF::sqrt(
+						matrix[0][0] * matrix[0][0] +
+						matrix[1][0] * matrix[1][0] +
+						matrix[2][0] * matrix[2][0]
+					),
+					MathF::sqrt(
+						matrix[0][1] * matrix[0][1] +
+						matrix[1][1] * matrix[1][1] +
+						matrix[2][1] * matrix[2][1]
+					),
+					MathF::sqrt(
+						matrix[0][2] * matrix[0][2] +
+						matrix[1][2] * matrix[1][2] +
+						matrix[2][2] * matrix[2][2]
+					)
+				};
+			}
+
+
+			/* ========== 適用関数 ========== */
+
+			/// <summary>
+			/// 平行移動ベクトル適応関数
+			/// </summary>
+			/// <param name="matrix">適応先行列</param>
+			/// <param name="translation">適用するベクトル</param>
+			/// <returns>適応した行列</returns>
+			[[nodiscard]] inline Matrix apply_translation(
+				const Matrix& matrix,
+				const Float3& translation
+			) {
+
+				return matrix * MathF::translation_to_matrix(translation);
+			}
+
+			/// <summary>
+			/// クオータニオン適応関数
+			/// </summary>
+			/// <param name="matrix">適応先行列</param>
+			/// <param name="rotation">適用するクオータニオン</param>
+			/// <returns>適応した行列</returns>
+			[[nodiscard]] inline Matrix apply_rotation(
+				const Matrix& matrix,
+				const Quaternion& rotation
+			) {
+
+				return matrix * MathF::quaternion_to_matrix(rotation);
+			}
+
+			/// <summary>
+			/// 拡大率適応関数
+			/// </summary>
+			/// <param name="matrix">適応先行列</param>
+			/// <param name="scale">適用する拡大率</param>
+			/// <returns>適応した行列</returns>
+			[[nodiscard]] inline Matrix apply_scale(
+				const Matrix& matrix,
+				const Float3& scale
+			) {
+
+				return matrix * MathF::scale_to_matrix(scale);
+			}
+
+			/// <summary>
+			/// トランスフォーム適応関数
+			/// </summary>
+			/// <param name="matrix">適応先行列</param>
+			/// <param name="translation">適用するベクトル</param>
+			/// <param name="rotation">適用するクオータニオン</param>
+			/// <param name="scale">適用する拡大率</param>
+			/// <returns>適応した行列</returns>
+			[[nodiscard]] inline Matrix apply_transform(
+				const Matrix& matrix,
+				const Float3& translation,
+				const Quaternion& rotation,
+				const Float3& scale
+			) {
+
+				return matrix * MathF::transform_to_matrix(
+					translation,
+					rotation,
+					scale
+				);
 			}
 
 		}

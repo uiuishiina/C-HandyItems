@@ -64,8 +64,6 @@ namespace HandyItem {
 				return MathF::sqrt(distance_squared(left, right));
 			}
 
-
-
 		}
 	}
 }

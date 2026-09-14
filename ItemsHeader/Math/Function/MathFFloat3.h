@@ -35,7 +35,6 @@ namespace HandyItem {
 					left.z_ * right.z_;
 			}
 
-
 			/// <summary>
 			/// 外積計算関数
 			/// </summary>
@@ -52,7 +51,6 @@ namespace HandyItem {
 					left.x_ * right.y_ - left.y_ * right.x_
 				};
 			}
-
 
 			/// <summary>
 			/// 距離二乗計算関数
@@ -74,7 +72,6 @@ namespace HandyItem {
 					y_len * y_len +
 					z_len * z_len;
 			}
-
 
 			/// <summary>
 			/// 距離計算関数

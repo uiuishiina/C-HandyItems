@@ -27,7 +27,7 @@ namespace HandyItem {
 			/// 単位クォータニオン作成関数
 			/// </summary>
 			/// <returns>作成した単位クォータニオン</returns>
-			[[nodiscard]] Quaternion identity() {
+			[[nodiscard]] Quaternion quaternion_identity() {
 
 				return {
 					0.0f,
@@ -53,7 +53,7 @@ namespace HandyItem {
 
 				//	ゼロベクトルなら単位クオータニオンを返す
 				if (axis.length_squared() == 0.0f) {
-					return identity();
+					return quaternion_identity();
 				}
 
 				//	正規化してから計算
@@ -119,6 +119,7 @@ namespace HandyItem {
 
 				return qx * qy * qz;
 			}
+
 
 			/* -- 利用関数 -- */
 
@@ -328,7 +329,7 @@ namespace HandyItem {
 					from.length_squared() <= epsilon ||
 					to.length_squared() <= epsilon
 					) {
-					return identity();
+					return quaternion_identity();
 				}
 
 				from.normalize();
@@ -338,7 +339,7 @@ namespace HandyItem {
 
 				// 同じ方向
 				if (d >= 1.0f - epsilon) {
-					return identity();
+					return quaternion_identity();
 				}
 
 				// 反対方向

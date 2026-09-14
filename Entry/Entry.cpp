@@ -1,38 +1,35 @@
 #include<iostream>
-#include"../ItemsHeader/Math/Function/MathFQuaternion.h"
 #include"../ItemsHeader/Math/Function/MathFMatrix.h"
 #include <iomanip>
 
 using namespace std;
-using namespace HandyItem;
+using namespace HandyItem::Math;
 
 int main() {
 
-	Math::Quaternion Q_{}, q_{};
+	Matrix matrix{ 
+		Float4{ 1.0f, 2.0f, 3.0f, 4.0f },
+		Float4{ 0.0f, 1.0f, 2.0f, 3.0f },
+		Float4{ 0.0f, 0.0f, 1.0f, 2.0f },
+		Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
+	};
 
-	q_ = Math::from_axis_angle(
-		{ 0.0f, 1.0f, 0.0f },
-		Math::MathF::HALF_PI
-	);
+	const auto result = matrix.inverse();
 
-	const auto result = Math::lerp(Q_, q_, 0.5f);
+	if (result.has_value()) {
 
-	std::cout << "Q_.x_ = " << Q_.x_ << endl;
-	std::cout << "Q_.y_ = " << Q_.y_ << endl;
-	std::cout << "Q_.z_ = " << Q_.z_ << endl;
-	std::cout << "Q_.w_ = " << Q_.w_ << endl << endl;
+		const auto value = result.value();
 
-	std::cout << "result = " << result.length() << endl;
+		cout << "value[0][0] = " << value[0][0] << endl;
+		cout << "value[1][1] = " << value[1][1] << endl;
+		cout << "value[2][2] = " << value[2][2] << endl;
+		cout << "value[3][3] = " << value[3][3] << endl;
 
-	//std::cout << "q_.x_ = " << q_.x_ << endl;
-	//std::cout << "q_.y_ = " << q_.y_ << endl;
-	//std::cout << "q_.z_ = " << q_.z_ << endl;
-	//std::cout << "q_.w_ = " << q_.w_ << endl << endl;
-
-	std::cout << "result.x_ = " << result.x_ << endl;
-	std::cout << "result.y_ = " << result.y_ << endl;
-	std::cout << "result.z_ = " << result.z_ << endl;
-	std::cout << "result.w_ = " << result.w_ << endl << endl;
-
+		const auto iden = matrix * value;
+		const auto iden2 = value * matrix;
+		cout << "is_identity = " << iden.is_identity() << endl;
+		cout << "is_identity = " << iden2.is_identity() << endl;
+	}
+	
 	return 0;
 }

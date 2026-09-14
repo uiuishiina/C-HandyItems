@@ -60,10 +60,9 @@ namespace HandyItem {
 				z_{ z } {}
 
 
+			/* ========== 演算子オーバーロード ========== */
 
-			/* -- 演算子オーバーロード -- */
-
-			/* -- アクセス -- */
+			/* ===== アクセス ===== */
 
 			/// <summary>
 			/// 要素アクセス演算子
@@ -107,7 +106,8 @@ namespace HandyItem {
 				}
 			}
 
-			/* -- 加算 -- */
+
+			/* ===== 加算 ===== */
 
 			/// <summary>
 			/// 加算演算子
@@ -134,14 +134,13 @@ namespace HandyItem {
 				const Float3& right
 				) {
 
-				x_ += right.x_;
-				y_ += right.y_;
-				z_ += right.z_;
+				*this = *this + right;
 
 				return *this;
 			}
 
-			/* -- 減算 -- */
+
+			/* ===== 減算 ===== */
 
 			/// <summary>
 			/// 減算演算子
@@ -168,14 +167,13 @@ namespace HandyItem {
 				const Float3& right
 				) {
 
-				x_ -= right.x_;
-				y_ -= right.y_;
-				z_ -= right.z_;
+				*this = *this - right;
 
 				return *this;
 			}
 
-			/* -- 乗算 -- */
+
+			/* ===== 乗算 ===== */
 
 			/// <summary>
 			/// 乗算演算子
@@ -202,9 +200,7 @@ namespace HandyItem {
 				const Float3& right
 				) {
 
-				x_ *= right.x_;
-				y_ *= right.y_;
-				z_ *= right.z_;
+				*this = *this * right;
 
 				return *this;
 			}
@@ -234,15 +230,13 @@ namespace HandyItem {
 				float right
 				) {
 
-				x_ *= right;
-				y_ *= right;
-				z_ *= right;
+				*this = *this * right;
 
 				return *this;
 			}
 
 
-			/* -- 除算 -- */
+			/* ===== 除算 ===== */
 
 			/// <summary>
 			/// 除算演算子
@@ -269,9 +263,7 @@ namespace HandyItem {
 				const Float3& right
 				) {
 
-				x_ /= right.x_;
-				y_ /= right.y_;
-				z_ /= right.z_;
+				*this = *this / right;
 
 				return *this;
 			}
@@ -301,14 +293,12 @@ namespace HandyItem {
 				float right
 				) {
 
-				x_ /= right;
-				y_ /= right;
-				z_ /= right;
+				*this = *this / right;
 
 				return *this;
 			}
 
-			/* -- 比較 -- */
+			/* ===== 比較 ===== */
 
 			/// <summary>
 			/// 等値比較演算子
@@ -338,7 +328,8 @@ namespace HandyItem {
 				return !(*this == right);
 			}
 
-			/* -- 反転 -- */
+
+			/* ===== その他 ===== */
 
 			/// <summary>
 			/// 符号反転演算子
@@ -354,7 +345,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 数学系関数 -- */
+			/* ===== 数学系関数 ===== */
 
 			/// <summary>
 			/// 二乗距離計算関数
@@ -407,6 +398,7 @@ namespace HandyItem {
 
 				return *this;
 			}
+
 		};
 	}
 }

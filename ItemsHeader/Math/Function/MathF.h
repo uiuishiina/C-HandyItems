@@ -48,7 +48,7 @@ namespace HandyItem {
 
 			/* ========== 基礎数学 ========== */
 
-			/* -- 三角関数 -- */
+			/* ===== 三角関数 ===== */
 
 			/// <summary>
 			/// SIN計算関数
@@ -87,7 +87,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 逆三角関数 -- */
+			/* ===== 逆三角関数 ===== */
 
 			/// <summary>
 			/// ASIN計算関数
@@ -140,7 +140,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 数値制限 -- */
+			/* ===== 数値制限 ===== */
 
 			/// <summary>
 			/// 最小値取得関数
@@ -195,7 +195,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 数値計算 -- */
+			/* ===== 数値計算 ===== */
 
 			/// <summary>
 			/// 平方根計算関数
@@ -346,6 +346,7 @@ namespace HandyItem {
 
 				return std::ceil(value);
 			}
+
 		}
 	}
 }

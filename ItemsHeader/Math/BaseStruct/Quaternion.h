@@ -1,6 +1,7 @@
 #pragma once
-#include "Float4.h"
-#include <cassert>
+#include"Float4.h"
+#include<optional>
+#include<cassert>
 
 /// <summary>
 /// 便利アイテム名前空間
@@ -42,7 +43,6 @@ namespace HandyItem {
 			/// [ W ] の値
 			/// </summary>
 			float w_{ 1.0f };
-
 
 			/* ========== メンバー関数 ========== */
 
@@ -91,7 +91,7 @@ namespace HandyItem {
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z、3: W）</param>
 			/// <returns>指定した要素への参照</returns>
-			float& operator [] (
+			[[nodiscard]] float& operator [] (
 				std::size_t index
 				) {
 
@@ -109,13 +109,12 @@ namespace HandyItem {
 				}
 			}
 
-
 			/// <summary>
 			/// 要素アクセス演算子
 			/// </summary>
 			/// <param name="index">要素番号（0: X、1: Y、2: Z、3: W）</param>
 			/// <returns>指定した要素へのConst参照</returns>
-			const float& operator [] (
+			[[nodiscard]] const float& operator [] (
 				std::size_t index
 				) const {
 
@@ -134,9 +133,9 @@ namespace HandyItem {
 			}
 
 
-			/* ===== 演算子 ===== */
+			/* ========== 演算子 ========== */
 
-			/* -- 加算 -- */
+			/* ===== 加算 ===== */
 
 			/// <summary>
 			/// 加算演算子
@@ -173,7 +172,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 減算 -- */
+			/* ===== 減算 ===== */
 
 			/// <summary>
 			/// 減算演算子
@@ -210,7 +209,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 乗算 -- */
+			/* ===== 乗算 ===== */
 
 			/// <summary>
 			/// 乗算演算子
@@ -258,7 +257,6 @@ namespace HandyItem {
 				return *this;
 			}
 
-
 			/// <summary>
 			/// スカラー倍乗算演算子
 			/// </summary>
@@ -291,8 +289,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 除算 -- */
-
+			/* ===== 除算 ===== */
 
 			/// <summary>
 			/// スカラー倍除算演算子
@@ -326,7 +323,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- 比較 -- */
+			/* ===== 比較 ===== */
 
 			/// <summary>
 			/// 等値比較演算子
@@ -358,7 +355,7 @@ namespace HandyItem {
 			}
 
 
-			/* -- その他 -- */
+			/* ===== その他 ===== */
 
 			/// <summary>
 			/// 符号反転演算子
