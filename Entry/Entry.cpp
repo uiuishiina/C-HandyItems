@@ -1,5 +1,5 @@
 #include<iostream>
-#include"../ItemsHeader/Math/Function/MathFMatrix.h"
+#include"../ItemsHeader/Math/BaseStruct/Transform.h"
 #include <iomanip>
 
 using namespace std;
@@ -7,29 +7,18 @@ using namespace HandyItem::Math;
 
 int main() {
 
-	Matrix matrix{ 
-		Float4{ 1.0f, 2.0f, 3.0f, 4.0f },
-		Float4{ 0.0f, 1.0f, 2.0f, 3.0f },
-		Float4{ 0.0f, 0.0f, 1.0f, 2.0f },
-		Float4{ 0.0f, 0.0f, 0.0f, 1.0f }
-	};
+	
+	Transform trans{};
+	trans.translation_ = { 10,0,0 };
 
-	const auto result = matrix.inverse();
+	const auto mat = trans.get_matrix();
 
-	if (result.has_value()) {
+	const auto pos = MathF::translation_from_matrix(mat);
 
-		const auto value = result.value();
-
-		cout << "value[0][0] = " << value[0][0] << endl;
-		cout << "value[1][1] = " << value[1][1] << endl;
-		cout << "value[2][2] = " << value[2][2] << endl;
-		cout << "value[3][3] = " << value[3][3] << endl;
-
-		const auto iden = matrix * value;
-		const auto iden2 = value * matrix;
-		cout << "is_identity = " << iden.is_identity() << endl;
-		cout << "is_identity = " << iden2.is_identity() << endl;
-	}
+	cout << "pos.x_ = " << pos.x_ << endl;
+	cout << "pos.y_ = " << pos.y_ << endl;
+	cout << "pos.z_ = " << pos.z_ << endl;
+	
 	
 	return 0;
 }
