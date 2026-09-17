@@ -150,6 +150,9 @@
     <ClInclude Include="ItemsHeader\Math\Function\MathFQuaternion.h">
       <Filter>ヘッダー ファイル\Math\Function</Filter>
     </ClInclude>
+    <ClInclude Include="ItemsHeader\Others\UniquePtr.h">
+      <Filter>ヘッダー ファイル\Others</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry\Entry.cpp">

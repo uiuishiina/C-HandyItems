@@ -2,10 +2,15 @@
 #include"../ItemsHeader/Math/BaseStruct/Transform.h"
 #include"../ItemsHeader/Math/Function/MathFQuaternion.h"
 #include"../ItemsHeader/Math/Function/MathFMatrix.h"
+#include"../ItemsHeader/Others/UniquePtr.h"
 #include <iomanip>
 
 using namespace std;
 using namespace HandyItem::Math;
+
+struct A {
+	HandyItem::others::UniquePtr<int> unique{};
+};
 
 int main() {
 
@@ -36,6 +41,17 @@ int main() {
 	cout << "mat[3].y_ = " << mat[3].y_ << endl;
 	cout << "mat[3].z_ = " << mat[3].z_ << endl;
 	cout << "mat[3].w_ = " << mat[3].w_ << endl << endl;
+
+	A a{};
+	a.unique.register_unique(std::move(std::make_unique<int>(10)));
 	
+	const auto weak = HandyItem::others::make_unique_weak(a.unique);
+
+	a.unique.delete_unique();
+
+	if (const auto* p = weak.get(); p) {
+		cout << *p << endl;
+	}
+
 	return 0;
 }

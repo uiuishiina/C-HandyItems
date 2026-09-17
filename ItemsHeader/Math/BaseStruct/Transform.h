@@ -127,6 +127,16 @@ namespace HandyItem {
 				scale_.z_ *= scale.z_;
 			}
 		
+			void set_parent(Transform& trans) {
+
+				parent_ = &trans;
+			}
+
+			void delete_parent() {
+
+				parent_ = nullptr;
+			}
+
 		};
 	}
 }
